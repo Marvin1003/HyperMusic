@@ -1,0 +1,146 @@
+*
+{
+  margin: 0;
+  padding: 0;
+}
+body
+{
+  font-family: 'Raleway';
+}
+.fullscreen-wallpaper
+{
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-height: 100%;
+  min-width: 100%;
+  background-image: url("../pictures/wallpaper/dj.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -99;
+}
+main>div:first-of-type
+{
+  position: relative;
+}
+#logo1
+{
+  position: absolute;
+  transition: all 1s linear;
+  opacity: 0;
+  top: 0;
+}
+#logo
+{
+  animation: logo 3s forwards;
+  z-index: 1;
+}
+
+
+@keyframes logo
+{
+    0%
+    {
+        transform: scale(4);
+    }
+    60%
+    {
+        transform: scale(0.85);
+    }
+    80%
+    {
+        transform: scale(1.2);
+    }
+    100%
+    {
+
+        transform: scale(1);
+    }
+}
+main
+{
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+nav ul{
+  white-space: nowrap;
+}
+nav ul li
+{
+  display: inline-block;
+  padding: 0 40px 0 40px;
+}
+nav a
+{
+  color: white;
+  text-decoration: none;
+  text-shadow: 1px 1px 5px black;
+  font-size: 20px;
+}
+nav li:first-of-type
+{
+  opacity: 0;
+  animation: fadein 1s .7s forwards;
+}
+nav li:nth-of-type(2)
+{
+  opacity: 0;
+  animation: fadein 1s 1.2s forwards;
+}
+nav li:nth-of-type(3)
+{
+  opacity: 0;
+  animation: fadein 1s 1.7s forwards;
+}
+nav li:last-of-type
+{
+  opacity: 0;
+  animation: fadein 1s 2.2s forwards;
+}
+@keyframes fadein
+{
+  from{opacity: 0}
+  to{ opacity: 1}
+}
+#audioplayer
+{
+  transform: scale(0);
+  animation: zoom 1s 2.2s forwards;
+}
+@keyframes zoom
+{
+  from{transform: scale(0)}
+  to{transform: scale(1)}
+}
+
+#songname
+{
+  margin-top: 10px;
+  height: 40px;
+  width: 530px;
+  background-color: rgba(255,255,255,0.5);
+  border-radius: 5px 5px 50px 50px;
+}
+#audiocontrol
+{
+  margin-top: 2px;
+  height: 40px;
+  width: 530px;
+  background-color: rgba(255,255,255,0.5);
+  border-radius: 50px 50px 5px 5px;
+}
+.material-icons
+{
+  color: black;
+  cursor: pointer;
+}
+.flex-center
+{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
