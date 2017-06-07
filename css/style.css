@@ -41,7 +41,7 @@ main>div:first-of-type
 {
     0%
     {
-        transform: scale(4);
+        transform: scale(10);
     }
     60%
     {
@@ -66,13 +66,18 @@ main
   align-items: center;
   overflow: hidden;
 }
+nav
+{
+  position: absolute;
+  top: 20px;
+}
 nav ul{
   white-space: nowrap;
 }
 nav ul li
 {
   display: inline-block;
-  padding: 0 40px 0 40px;
+  padding: 0 50px 0 50px;
 }
 nav a
 {
@@ -108,8 +113,10 @@ nav li:last-of-type
 }
 #audioplayer
 {
+  position: absolute;
+  bottom: 0;
   transform: scale(0);
-  animation: zoom 1s 2.2s forwards;
+  animation: zoom 1s 1.7s forwards;
 }
 @keyframes zoom
 {
@@ -117,36 +124,46 @@ nav li:last-of-type
   to{transform: scale(1)}
 }
 
-#songname
+#song
 {
   margin-top: 10px;
   height: 40px;
-  width: 530px;
-  background-color: rgba(255,255,255,0.5);
-  border-radius: 5px 5px 50px 50px;
+  width: 100vw;
+  background-color: rgba(255,255,255,0.7);
+  /*border-radius: 20px 20px 0 0;*/
+}
+#songname
+{
+  font-size: 16px;
+  text-align: center;
 }
 #audiocontrol
 {
-  margin-top: 2px;
+  border-top: 1px solid gray;
   height: 40px;
-  width: 530px;
-  background-color: rgba(255,255,255,0.5);
-  border-radius: 50px 50px 5px 5px;
+  width: 100vw;
+  background-color: rgba(255,255,255,0.7);
+  /*border-radius: 0 0 20px 20px;*/
 }
 #audiocontrol>div:first-of-type
 {
-  width: 430px;
+  width: 83.33%;
+  margin-left: 40px;
 }
 #audiocontrol>div:last-of-type
 {
-  position: relative;
-  width: 60px;
+  width: 16.67%;
   margin-right: 40px;
 }
 .material-icons
 {
-  color: black;
+  color: rgba(0,0,0,0.8);
   cursor: pointer;
+  transition: all .5s linear;
+}
+.material-icons:hover
+{
+  color: #0055ff;
 }
 .flex-center
 {
@@ -154,13 +171,38 @@ nav li:last-of-type
   justify-content: space-around;
   align-items: center;
 }
-#volume
-{
-  position: relative;
-}
 #volumeslider
 {
   display: none;
   position: absolute;
   width: 80px;
+}
+input {
+  -webkit-appearance: none;
+  position: absolute;
+  width: 100%;
+  background: rgba(0,0,0,0);
+}
+input::-webkit-slider-runnable-track{
+  width: 60px;
+  height: 10px;
+  background: rgba(0,0,0,0.8);
+  border-radius: 50px;
+}
+input::-webkit-slider-thumb{
+  cursor: pointer;
+  margin-top: -2px;
+  height: 30px;
+  border-radius: 10px;
+}
+input::-moz-slider-runnable-track{
+  width: 50px;
+  height: 10px;
+  background:rgba(0,0,0,0.8);
+  border-radius: 50px;
+}
+input::-moz-slider-thumb{
+  cursor: pointer;
+  margin-top: -2px;
+  height: 30px;
 }

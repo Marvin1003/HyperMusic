@@ -1,9 +1,10 @@
 
 
 /* INITIALIZE VOLUME */
+var audio;
 window.onload = function()
 {
-  var audio = document.getElementById("audio");
+  audio = document.getElementById("audio");
   audio.volume = 0.1;
   {
     setTimeout(
@@ -14,21 +15,10 @@ window.onload = function()
     }, 3000);
   }
 }
-
+var tracknumber = 1;
 function playpause()
 {
-  var icon = document.getElementById("playpausebutton");
-  var audio = document.getElementById("audio");
-  if(icon.textContent === "play_arrow")
-  {
-    icon.textContent ="pause";
-    audio.play();
-  }
-  else
-  {
-    icon.textContent = "play_arrow";
-    audio.pause();
-  }
+  changeicon1();
 }
 /* AUDIO PLAYER */
 /* GLOBAL OBJECTS*/
@@ -62,6 +52,77 @@ function showvolumeslider()
 
 function setvolume(volume)
 {
-  var audio = document.getElementById("audio");
+  audio = document.getElementById("audio");
   audio.volume = volume/100;
+}
+function next()
+{
+  tracknumber++;
+  if(tracknumber == 5)
+    tracknumber = 1;
+  changeicon();
+  play();
+  audio.play();
+}
+function previous()
+{
+  tracknumber--;
+  if(tracknumber == 0)
+    tracknumber = 4;
+  changeicon();
+  play();
+}
+function shuffle()
+{
+  var random;
+  do {
+    random = Math.round(Math.random()*3+1);
+  } while (tracknumber === random);
+  tracknumber = random;
+  play();
+}
+function play()
+{
+  audio = document.getElementById("audio");
+  var trackname = 'music/' + tracknumber + ".mp3";
+  audio.src = trackname;
+  audio.play();
+  var songname = document.getElementById("songname");
+  if(tracknumber === 1)
+    songname.textContent = "Mike Perry - The Ocean (DiCaprio Remix)";
+  else if(tracknumber === 2)
+    songname.textContent = "Luis Fonsi & Daddy Yankee ft. Justin Bieber - Despacito (El Bee X Chunky Dip Remix)";
+  else if(tracknumber === 3)
+    songname.textContent = "Galantis - No Money (Andrew Belize Remix)";
+  else if(tracknumber === 4)
+    songname.textContent = "The Chainsmokers - Don't Say ft. Emily Warren (DEVI Remix)";
+
+    audio.addEventListener('ended', function()
+    {
+      tracknumber++;
+      if(tracknumber == 5)
+        tracknumber = 1;
+      play();
+    });
+
+}
+function changeicon1()
+{
+  var icon = document.getElementById("playpausebutton");
+  if(icon.textContent === "play_arrow")
+  {
+    icon.textContent ="pause";
+    play();
+  }
+  else
+  {
+    icon.textContent = "play_arrow";
+    audio.pause();
+  }
+}
+function changeicon()
+{
+  var icon = document.getElementById("playpausebutton");
+  if(icon.textContent === "play_arrow")
+    icon.textContent ="pause";
 }
