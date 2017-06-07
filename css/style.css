@@ -133,6 +133,16 @@ nav li:last-of-type
   background-color: rgba(255,255,255,0.5);
   border-radius: 50px 50px 5px 5px;
 }
+#audiocontrol>div:first-of-type
+{
+  width: 430px;
+}
+#audiocontrol>div:last-of-type
+{
+  position: relative;
+  width: 60px;
+  margin-right: 40px;
+}
 .material-icons
 {
   color: black;
@@ -143,4 +153,14 @@ nav li:last-of-type
   display: flex;
   justify-content: space-around;
   align-items: center;
+}
+#volume
+{
+  position: relative;
+}
+#volumeslider
+{
+  display: none;
+  position: absolute;
+  width: 80px;
 }
