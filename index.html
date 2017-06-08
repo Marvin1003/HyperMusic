@@ -11,39 +11,52 @@
     <meta charset="utf-8">
   </head>
   <body>
-    <div class="fullscreen-wallpaper"></div>
-    <main>
+    <section>
+
       <nav>
         <ul>
-          <li><a href="#">news</a></li>
-          <li><a href="#">projekte</a></li>
-          <li><a href="#">buchung</a></li>
-          <li><a href="#">kontakt</a></li>
+          <li><a href="#">latest uploads</a></li>
+          <li><a href="#">submission</a></li>
+          <li><a href="#">booking</a></li>
+          <li><a href="#">contact</a></li>
         </ul>
       </nav>
-      <div class="logo">
-        <img id="logo" src="pictures/logo/logolight.png" alt="Logolight">
-        <img id="logo1" src="pictures/logo/logodark.png" alt="Logodark"></div>
-      <div id="audioplayer">
-        <div id="song" class="flex-center">
-          <h3 id="songname">#HyperMusic</h3>
+      <main class="fullscreen-wallpaper" id="dj">
+        <div id="player"></div>
+        <div class="logo">
+          <img id="logo" src="pictures/logo/logolight.png" alt="Logolight">
+          <img id="logo1" src="pictures/logo/logodark.png" alt="Logodark">
         </div>
-        <div id="audiocontrol" class="flex-center">
-            <div class="flex-center">
-              <i class="material-icons" onclick=shuffle()>shuffle</i>
-              <i class="material-icons" onclick=previous()>skip_previous</i>
-              <i class="material-icons" onclick=playpause() id="playpausebutton">play_arrow</i>
-              <i class="material-icons" onclick=next()>skip_next</i>
+        <div id="cover" class="fullscreen-wallpaper"></div>
+      </main>
+      <footer>
+        <div id="audioplayer">
+          <div id="song" class="flex-center">
+            <div>
+              <div></div>
+              <h3 id="songname">#HyperMusic</h3>
+              <div></div>
             </div>
-            <div id="volume" class="flex-center">
-              <i class="material-icons" id="volumebutton" onclick=showvolumeslider()>volume_up</i>
-              <input type="range" min="0" max="100" step="1" value="10" oninput=setvolume(this.value) id="volumeslider"></input>
-            </div>
-          <audio id="audio" src="music/1.mp3" type="audio/mpeg"/>
-            Sadly your browser does not support the audio file.
-          </audio>
-      </div>
-      </div>
-    </main>
+          </div>
+          <div id="audiocontrol" class="flex-center">
+              <div class="flex-center">
+                <i class="material-icons" onclick=showvid() id="showvidicon">video_library</i>
+                <i class="material-icons" id="shuffle" onclick=shuffle()>shuffle</i>
+                <i class="material-icons" onclick=previous()>skip_previous</i>
+                <i class="material-icons" onclick=playpause() id="playpausebutton">play_arrow</i>
+                <i class="material-icons" onclick=next()>skip_next</i>
+                <i class="material-icons" id="repeat" onclick=repeat()>repeat_one</i>
+              </div>
+              <div id="volume" class="flex-center">
+                <i class="material-icons" id="volumebutton" onclick=showvolumeslider()>volume_up</i>
+                <input type="range" min="0" max="100" step="1" value="10" oninput=setvolume(this.value) id="volumeslider"></input>
+              </div>
+            <audio id="audio" type="audio/mpeg"/>
+              Sadly your browser does not support the audio file.
+            </audio>
+        </div>
+        </div>
+      </footer>
+    </section>
   </body>
 </html>
