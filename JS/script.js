@@ -2,21 +2,36 @@
 
 /* INITIALIZE VOLUME */
 var audio;
+var player;
 window.onload = function()
 {
-  play();
+  setTimeout(function()
+  {
+    play();
+    changeicon();
+  }, 2500);
+
   var showvidicon = document.getElementById("showvidicon");
   var iconshuffle = document.getElementById("shuffle");
   var iconrepeat = document.getElementById("repeat");
   showvidicon.style.color = "white";
   iconshuffle.style.color = "white";
   iconrepeat.style.color = "white";
-  /* INITIALIZE WITH LOW VOLUME */
-  player.setVolume(5);
 
-  var wallpaper = document.getElementById("dj");
-  wallpaper.style.transform = "scale(1)";
-  wallpaper.style.borderRadius = "0";
+  var main = document.getElementById("dj").id = "introbackground";
+  var section = document.getElementById("section");
+  var name = document.getElementById("name");
+
+  setTimeout( function() {
+    var main = document.getElementById("introbackground").id = "dj";
+    section.style.transition = "transition: 1s ease-in-out";
+    name.style.display = "none";
+    document.getElementById("dj").style.display = "flex";
+  }, 3000);
+
+  /* INITIALIZE WITH LOW VOLUME */
+  player.setVolume(2.5);
+
   {
     setTimeout(
       function()
@@ -63,8 +78,7 @@ function showvolumeslider()
 
 function setvolume(volume)
 {
-  audio = document.getElementById("audio");
-  audio.volume = volume/100;
+  player.setVolume(volume);
 }
 
 
@@ -133,7 +147,6 @@ function play()
 {
   var musicvideo = document.getElementById("player");
   safetracknumber = tracknumber;
-  var coverimg = document.getElementById("cover");
   audio = document.getElementById("audio");
   /*audio.play();*/
   var songname = document.getElementById("songname");
@@ -204,6 +217,8 @@ function NextSong()
   }
   else if(iconrepeat.style.color !== "white")
   {
+    player.seekTo(0);
+    player.playVideo();
     tracknumber = safetracknumber;
   }
   else if(iconshuffle.style.color !== "white")
@@ -253,7 +268,7 @@ tag.src = "https://www.youtube.com/iframe_api";
 var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-var player;
+
 function onYouTubeIframeAPIReady()
 {
   player = new YT.Player('player', {

@@ -9,10 +9,10 @@
       rel="stylesheet">
     <script language="JavaScript" type="text/javascript" src="JS/script.js"></script>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   <body>
-    <section>
-
+    <section id="section">
       <nav>
         <ul>
           <li><a href="#">latest uploads</a></li>
@@ -21,13 +21,13 @@
           <li><a href="#">contact</a></li>
         </ul>
       </nav>
-      <main class="fullscreen-wallpaper" id="dj">
+      <main id="dj">
         <div id="player"></div>
         <div class="logo">
           <img id="logo" src="pictures/logo/logolight.png" alt="Logolight">
           <img id="logo1" src="pictures/logo/logodark.png" alt="Logodark">
+          <h3 id="name">I bims eins Timo</h3>
         </div>
-        <div id="cover" class="fullscreen-wallpaper"></div>
       </main>
       <footer>
         <div id="audioplayer">
@@ -49,7 +49,7 @@
               </div>
               <div id="volume" class="flex-center">
                 <i class="material-icons" id="volumebutton" onclick=showvolumeslider()>volume_up</i>
-                <input type="range" min="0" max="100" step="1" value="10" oninput=setvolume(this.value) id="volumeslider"></input>
+                <input type="range" min="0" max="25" step="1" value="2.5" oninput=setvolume(this.value) id="volumeslider"></input>
               </div>
             <audio id="audio" type="audio/mpeg"/>
               Sadly your browser does not support the audio file.

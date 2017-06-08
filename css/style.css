@@ -17,10 +17,18 @@ body,html
 }
 #dj
 {
+  display: none;
   background-image: url("../pictures/wallpaper/dj.jpg");
-  transition: 2s ease-in-out;
   transform: scale(0);
+  animation: zoomandborder 1.5s forwards;
   border-radius: 500px;
+}
+@keyframes zoomandborder
+{
+  from{transform: scale(0);
+       border-radius: 500px;}
+  to{transform: scale(1);
+     border-radius: 0;}
 }
 #cover
 {
@@ -32,11 +40,31 @@ body,html
 .logo
 {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#name
+{
+  position: absolute;
+  bottom: -1000px;
+  white-space: nowrap;
+  color: white;
+  animation: test 1s 1.5s forwards;
+  letter-spacing: 2px;
+  font-weight: normal;
+  padding: 10px 30px 0 30px;
+  border-top: 1px solid lightgray;
+}
+@keyframes test
+{
+  from{bottom: -1000px}
+  to{bottom: 0}
 }
 #logo1
 {
   position: absolute;
-  transition: all 1s linear;
+  transition: all 1.5s linear;
   opacity: 0;
   top: 0;
 }
@@ -58,7 +86,7 @@ body,html
 
 #logo
 {
-  animation: logo 3s forwards;
+  animation: logo 2s forwards;
 }
 
 
@@ -106,6 +134,7 @@ nav
   background-color: #1e1e1e;
   transform: scale(0);
   animation: zoom 1s 1.7s forwards;
+  z-index: 1;
 }
 nav ul
 {
@@ -170,6 +199,7 @@ nav li:last-of-type
   font-size: 16px;
   text-align: center;
   color: white;
+  white-space: nowrap;
 }
 #song>div{
   display: flex;
@@ -265,8 +295,19 @@ input::-moz-slider-thumb{
 {
   transform:scale(0);
   transition: 2s ease-in-out;
-  z-index: 99;
+  z-index: 1;
   position: absolute;
   width: 150%;
   height: 150%;
+}
+
+#introbackground
+{
+  position: absolute;
+  background-image: none;
+  background-color: black;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  z-index: 99;
 }
