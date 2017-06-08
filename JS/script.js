@@ -210,7 +210,7 @@ function NextSong()
   var iconrepeat = document.getElementById("repeat");
   if(iconrepeat.style.color === "white" && iconshuffle.style.color === "white")
   {
-    if(tracknumber == 5)
+    if(tracknumber === 5)
       tracknumber = 1;
     else
       tracknumber++;
@@ -219,12 +219,12 @@ function NextSong()
   {
     player.seekTo(0);
     player.playVideo();
-    tracknumber = safetracknumber;
   }
   else if(iconshuffle.style.color !== "white")
   {
     random();
   }
+  play();
 }
 
 
