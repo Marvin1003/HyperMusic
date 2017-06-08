@@ -4,6 +4,7 @@
 var audio;
 window.onload = function()
 {
+  play();
   var showvidicon = document.getElementById("showvidicon");
   var iconshuffle = document.getElementById("shuffle");
   var iconrepeat = document.getElementById("repeat");
@@ -11,8 +12,7 @@ window.onload = function()
   iconshuffle.style.color = "white";
   iconrepeat.style.color = "white";
   /* INITIALIZE WITH LOW VOLUME */
-  audio = document.getElementById("audio");
-  audio.volume = 0.1;
+  player.setVolume(5);
 
   var wallpaper = document.getElementById("dj");
   wallpaper.style.transform = "scale(1)";
@@ -135,56 +135,51 @@ function play()
   safetracknumber = tracknumber;
   var coverimg = document.getElementById("cover");
   audio = document.getElementById("audio");
-  var trackname = 'music/' + tracknumber + ".mp3";
-  audio.src = trackname;
   /*audio.play();*/
   var songname = document.getElementById("songname");
-  if(tracknumber === 1)
-  {
-    songname.textContent = "Luis Fonsi & Daddy Yankee ft. Justin Bieber - Despacito (El Bee X Chunky Dip Remix)";
-    player.loadVideoById('kZFHX21QwIw');
-    musicvideo.style.opacity = "1";
-  }
-  else if(tracknumber === 2)
-  {
-    songname.textContent = "The Chainsmokers - Don't Say ft. Emily Warren (DEVI Remix)";
-    player.loadVideoById('2mjMRLFoUWE');
-    musicvideo.style.opacity = "1";
-  }
-  else if(tracknumber === 3)
-  {
-    songname.textContent = "Mike Williams Ft. Brēzy - Don't Hurt (TuneSquad x Adryx - G Bootleg)";
-    player.loadVideoById('qlT0huRUrqI');
-    musicvideo.style.opacity = "1";
-  }
-  else if(tracknumber === 4)
-  {
-    songname.textContent = "Martin Garrix & Troye Sivan - There For You (Tom Westy Remix)";
-    player.loadVideoById('5y2pG-dtVKc');
-    musicvideo.style.opacity = "1";
-  }
-  else if(tracknumber === 5)
-  {
-    songname.textContent = "TESTING";
-    player.loadVideoById('B7bqAsxee4I');
-    musicvideo.style.opacity = "1";
-  }
-    audio.addEventListener('ended', NextSong);
+    if(tracknumber === 1)
+    {
+      songname.textContent = "Luis Fonsi & Daddy Yankee ft. Justin Bieber - Despacito (El Bee X Chunky Dip Remix)";
+      player.loadVideoById('kZFHX21QwIw');
+    }
+    else if(tracknumber === 2)
+    {
+      songname.textContent = "The Chainsmokers - Don't Say ft. Emily Warren (DEVI Remix)";
+      player.loadVideoById('2mjMRLFoUWE');
+    }
+    else if(tracknumber === 3)
+    {
+      songname.textContent = "Mike Williams Ft. Brēzy - Don't Hurt (TuneSquad x Adryx - G Bootleg)";
+      player.loadVideoById('qlT0huRUrqI');
+    }
+    else if(tracknumber === 4)
+    {
+      songname.textContent = "Martin Garrix & Troye Sivan - There For You (Tom Westy Remix)";
+      player.loadVideoById('5y2pG-dtVKc');
+    }
+    else if(tracknumber === 5)
+    {
+      songname.textContent = "TESTING";
+      player.loadVideoById('B7bqAsxee4I');
+    }
+  audio.addEventListener('ended', NextSong);
 }
 
-
+var test = 0.00;
 function changeicon1()
 {
   var icon = document.getElementById("playpausebutton");
   if(icon.textContent === "play_arrow")
   {
     icon.textContent ="pause";
-    play();
+    player.seekTo(test);
+    player.playVideo();
   }
   else
   {
     icon.textContent = "play_arrow";
-    audio.pause();
+    test = player.getCurrentTime();
+    player.pauseVideo();
   }
 }
 
@@ -215,7 +210,6 @@ function NextSong()
   {
     random();
   }
-  play();
 }
 
 
@@ -234,7 +228,10 @@ function showvid()
     logo1.style.display="none";
     musicvideo.style.transform = "scale(1)";
     if(icon.textContent === "play_arrow")
-      play();
+    {
+      player.playVideo(test);
+      icon.textContent = "pause";
+    }
   }
   else
   {
@@ -266,9 +263,9 @@ function onYouTubeIframeAPIReady()
   })
 }
 // autoplay video
-function onPlayerReady(event) {
+/*function onPlayerReady(event) {
     event.target.playVideo();
-}
+}*/
 // 5. The API calls this function when the player's state changes.
 //    The function indicates that when playing a video (state=1),
 //    the player should play for six seconds and then stop.
@@ -278,9 +275,6 @@ function onPlayerStateChange(event) {
     done = true;
     NextSong();
   }
-}
-function stopVideo() {
-  player.stopVideo();
 }
 
 // when video ends
