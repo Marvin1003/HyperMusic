@@ -1,18 +1,19 @@
 
 
 /* INITIALIZE VOLUME */
-var audio;
-var player;
+var audio, player, showvidicon, iconshuffle, iconrepeat, main, section, nav, iconnav;
 
 window.onload = function()
 {
-  var showvidicon = document.getElementById("showvidicon");
-  var iconshuffle = document.getElementById("shuffle");
-  var iconrepeat = document.getElementById("repeat");
-  var main = document.getElementById("dj").id = "introbackground";
-  var section = document.getElementById("section");
   var name = document.getElementById("name");
-  var nav = document.getElementById("nav");
+
+  showvidicon = document.getElementById("showvidicon");
+  iconshuffle = document.getElementById("shuffle");
+  iconrepeat = document.getElementById("repeat");
+  main = document.getElementById("dj").id = "introbackground";
+  section = document.getElementById("section");
+  nav = document.getElementById("nav");
+  iconnav = document.getElementById("icons");
 
   showvidicon.style.color = "white";
   iconshuffle.style.color = "white";
@@ -26,7 +27,7 @@ window.onload = function()
   }, 2500);
 
   setTimeout( function() {
-    var main = document.getElementById("introbackground").id = "dj";
+    main = document.getElementById("introbackground").id = "dj";
     section.style.transition = "transition: 1s ease-in-out";
     name.style.display = "none";
     document.getElementById("dj").style.display = "flex";
@@ -34,7 +35,9 @@ window.onload = function()
     //section.style.transition = "scale(0)";
     //section.style.opacity = "0";
     section.style.animation = "frombottom 2s forwards";
-    nav.style.display = "block";
+    iconnav.style.visibility = "visible";
+    nav.style.visibility = "visible";
+    //nav.style.display = "block";
   }, 3000);
 
   /* INITIALIZE WITH LOW VOLUME */
@@ -69,6 +72,18 @@ window.onclick = function(mouse)
   clickcount = 1;
   clickcount++;
 }
+
+
+function shownav(value)
+{
+  iconnav = document.getElementById("icons");
+  if(value === 1)
+    iconnav.style.animation = "goUp 1s forwards";
+  else
+    iconnav.style.animation = "goDown 1s forwards";
+}
+
+
 function showvolumeslider()
 {
   clickcount = 0;

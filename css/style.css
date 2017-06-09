@@ -11,7 +11,7 @@ body,html
 {
   height: 100%;
   min-width: 100%;
-  background-position: center;
+  background-position: top;
   background-repeat: no-repeat;
   z-index: -99;
 }
@@ -47,13 +47,13 @@ body,html
   bottom: -1000px;
   white-space: nowrap;
   color: white;
-  animation: test 1s 1.5s forwards;
+  animation: name 1s 1.5s forwards;
   letter-spacing: 2px;
   font-weight: normal;
   padding: 10px 30px 0 30px;
   border-top: 1px solid lightgray;
 }
-@keyframes test
+@keyframes name
 {
   from{bottom: -1000px}
   to{bottom: 0}
@@ -125,13 +125,81 @@ section
   flex-direction: column;
   overflow: hidden;
 }
-nav
+.menu
 {
-  display: none;
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#showicons
+{
+  position: absolute;
+  top: 65px;
+}
+#social
+{
+  cursor: pointer;
+}
+#icons
+{
+  visibility: hidden;
+  position: absolute;
+  display: block;
+  z-index: 99;
+  overflow: hidden;
+}
+header ul
+{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+header  i
+{
+  transition: .3s ease-in-out;
+  cursor: pointer;
+}
+header a:nth-of-type(1):hover i
+{
+  color: orange;
+}
+header a:nth-of-type(2):hover i
+{
+  color: #fcc41e;
+}
+header a:nth-of-type(3):hover i
+{
+  color: #DD4F43;
+}
+header a:nth-of-type(4):hover i
+{
+  color: #D22222;
+}
+
+
+a
+{
+  color: white;
+  text-decoration: none;
+}
+.navi
+{
   height: 60px;
   width: 100%;
   background-color: #1e1e1e;
+}
+ul
+{
+  list-style-type: none;
+}
+nav
+{
+  visibility: hidden;
+  position: absolute;
+  top: 0;
   z-index: 1;
 }
 nav ul
@@ -142,14 +210,13 @@ nav ul
   display: flex;
   justify-content: space-around;
   align-items: center;
-  list-style-type: none;
 }
-nav a
+nav li, nav a
 {
   color: white;
-  text-decoration: none;
   font-size: 20px;
 }
+
 /*nav li:first-of-type
 {
   opacity: 0;
@@ -316,4 +383,15 @@ input::-moz-slider-thumb{
   height: 100%;
   z-index: -1;
   pointer-events: none;
+}
+
+@keyframes goUp
+{
+  from{top: 0px}
+  to{top: -60px}
+}
+@keyframes goDown
+{
+  from{top: -60px}
+  to{top: 0px}
 }

@@ -7,17 +7,28 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
+    <script src="https://use.fontawesome.com/a5a45e93f0.js"></script>
     <script language="JavaScript" type="text/javascript" src="JS/script.js"></script>
     <meta charset="utf-8">
+    <link rel="icon" href="pictures/logo/logodark.png" type="image/gif" sizes="16x16">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   <body>
     <section id="section">
-      <nav id="nav">
+      <header class="navi" id="icons">
         <ul>
-          <li><a href="#">about me</a></li>
+          <a href="https://soundcloud.com/hypermusicofficial"><i class="fa fa-soundcloud fa-2x" aria-hidden="true"></i></a>
+          <a href="https://www.instagram.com/hypermusicofficial/"><i class="fa fa-instagram fa-2x" aria-hidden="true"></i></a>
+          <i class="material-icons" onclick=shownav(1)>dehaze</i>
+          <a href="https://plus.google.com/+HyperMusicOfficial"><i class="fa fa-google-plus-official fa-2x" aria-hidden="true"></i></a>
+          <a href="https://www.youtube.com/hypermusicofficial"><i class="fa fa-youtube-play fa-2x" aria-hidden="true"></i></a>
+        </ul>
+      </header>
+      <nav class="navi" id="nav">
+        <ul>
           <li><a href="#">latest uploads</a></li>
           <li><a href="#">submission</a></li>
+          <li onclick=shownav(2) id="social">social-media</li>
           <li><a href="#">booking</a></li>
           <li><a href="#">contact</a></li>
         </ul>
