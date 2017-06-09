@@ -3,35 +3,41 @@
 /* INITIALIZE VOLUME */
 var audio;
 var player;
+
 window.onload = function()
 {
-  setTimeout(function()
-  {
-    play();
-    changeicon();
-  }, 2500);
-
   var showvidicon = document.getElementById("showvidicon");
   var iconshuffle = document.getElementById("shuffle");
   var iconrepeat = document.getElementById("repeat");
+  var main = document.getElementById("dj").id = "introbackground";
+  var section = document.getElementById("section");
+  var name = document.getElementById("name");
+  var nav = document.getElementById("nav");
+
   showvidicon.style.color = "white";
   iconshuffle.style.color = "white";
   iconrepeat.style.color = "white";
 
-  var main = document.getElementById("dj").id = "introbackground";
-  var section = document.getElementById("section");
-  var name = document.getElementById("name");
+  setTimeout(function()
+  {
+    player.setVolume(2.5);
+    play();
+    changeicon();
+  }, 2500);
 
   setTimeout( function() {
     var main = document.getElementById("introbackground").id = "dj";
     section.style.transition = "transition: 1s ease-in-out";
     name.style.display = "none";
     document.getElementById("dj").style.display = "flex";
+    //section.style.top = "100vh";
+    //section.style.transition = "scale(0)";
+    //section.style.opacity = "0";
+    section.style.animation = "frombottom 2s forwards";
+    nav.style.display = "block";
   }, 3000);
 
   /* INITIALIZE WITH LOW VOLUME */
-  player.setVolume(2.5);
-
   {
     setTimeout(
       function()
@@ -217,8 +223,9 @@ function NextSong()
   }
   else if(iconrepeat.style.color !== "white")
   {
-    player.seekTo(0);
-    player.playVideo();
+    playerVars: {
+        loop: '1'
+      }
   }
   else if(iconshuffle.style.color !== "white")
   {
@@ -232,16 +239,15 @@ function showvid()
 {
   var icon = document.getElementById("playpausebutton");
   var showvidicon = document.getElementById("showvidicon");
-  var musicvideo = document.getElementById("player");
   var logo = document.getElementById("logo");
   var logo1 = document.getElementById("logo1")
-
+  var clickvideo = document.getElementById("clickvideo");
   if(showvidicon.style.color === "white")
   {
     showvidicon.style.color = "#007fff";
     logo.style.display="none";
     logo1.style.display="none";
-    musicvideo.style.transform = "scale(1)";
+    clickvideo.style.transform = "scale(1)";
     if(icon.textContent === "play_arrow")
     {
       player.playVideo(test);
@@ -251,7 +257,7 @@ function showvid()
   else
   {
     showvidicon.style.color = "white";
-    musicvideo.style.transform = "scale(0)";
+    clickvideo.style.transform = "scale(0)";
     logo.style.display="block";
     logo.style.animation="none";
     logo1.style.display="block";
@@ -261,7 +267,6 @@ function showvid()
 
 
 /* YOUTUBE VIDEO PLAYER */
-
 var tag = document.createElement('script');
 tag.src = "https://www.youtube.com/iframe_api";
 
@@ -272,6 +277,17 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 function onYouTubeIframeAPIReady()
 {
   player = new YT.Player('player', {
+    playerVars: {
+      'controls': 0,
+      'autohide': 1,
+      'showinfo' : 0, // <- This part here
+      'wmode': 'opaque',
+      'rel': 0,
+      'fs' : 0,
+      'disablekb' : 1,
+      'modestbranding' : 1,
+      'playsinline' : 1
+    },
     events: {
       'onStateChange': onPlayerStateChange
     }
