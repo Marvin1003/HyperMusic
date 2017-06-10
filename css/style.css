@@ -217,27 +217,6 @@ nav li, nav a
   font-size: 20px;
 }
 
-/*nav li:first-of-type
-{
-  opacity: 0;
-  animation: fadein 1s .7s forwards;
-}
-nav li:nth-of-type(2)
-{
-  opacity: 0;
-  animation: fadein 1s 1.2s forwards;
-}
-nav li:nth-of-type(3)
-{
-  opacity: 0;
-  animation: fadein 1s 1.7s forwards;
-}
-nav li:last-of-type
-{
-  opacity: 0;
-  animation: fadein 1s 2.2s forwards;
-}
-*/
 @keyframes fadein
 {
   from{opacity: 0}
@@ -245,6 +224,7 @@ nav li:last-of-type
 }
 #audioplayer
 {
+  visibility: hidden;
   transform: scale(0);
   animation: zoom 1s 1.7s forwards;
 }
@@ -394,4 +374,8 @@ input::-moz-slider-thumb{
 {
   from{top: -60px}
   to{top: 0px}
+}
+marquee
+{
+  behavior: slide;
 }

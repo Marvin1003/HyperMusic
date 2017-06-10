@@ -1,12 +1,88 @@
 
+/* YOUTUBE VIDEO PLAYER */
+var playlisttrack = 0;
+var tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
 
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+var player;
+
+function onYouTubeIframeAPIReady()
+{
+  player = new YT.Player('player', {
+    playerVars: {
+      controls: '0',
+      autohide: '1',
+      showinfo : '0', // <- This part here
+      wmode: 'opaque',
+      rel: '0',
+      fs: '0',
+      disablekb : '1',
+      modestbranding : '1',
+      playsinline : '1',
+      enablejsapi : '1',
+      loop: '1',
+    },
+    events: {
+      'onReady' : onPlayerReady,
+      'onStateChange': onPlayerStateChange,
+      'onError' : onPlayerError
+    }
+  })
+}
+// autoplay video
+/*function onPlayerReady(event) {
+    event.target.playVideo();
+}*/
+// 5. The API calls this function when the player's state changes.
+//    The function indicates that when playing a video (state=1),
+//    the player should play for six seconds and then stop.
+function onPlayerError()
+{
+  player.nextVideo();
+}
+
+function onPlayerReady(event)
+{
+  event.target.setPlaybackQuality('small');
+  event.target.setVolume(2.5);
+  event.target.setLoop(true);
+  event.target.cuePlaylist(
+    {
+      listType: 'playlist',
+      list: 'PLWaEl4Kd1431oovMu8hTTThjAKnS--QXu',
+      index: playlisttrack,
+    })
+}
+
+function onPlayerStateChange(event) {
+  document.getElementById("songname").textContent = player.getVideoData().title;
+  var iconrepeat = document.getElementById("repeat");
+  var showvidicon = document.getElementById("showvidicon");
+  if (event.data === 3 && showvidicon.style.color === "white")
+  {
+      event.target.setPlaybackQuality('small');
+  }
+}
+function setShuffle(shuffle)
+{
+    player.setShuffle(shuffle);
+}
+
+
+// when video ends
+/*
+function onPlayerStateChange(event) {
+    if(event.data === 0) {
+        alert('done');
+    }
+}*/
 /* INITIALIZE VOLUME */
-var audio, player, showvidicon, iconshuffle, iconrepeat, main, section, nav, iconnav;
-
+var audio, showvidicon, iconshuffle, iconrepeat, main, section, nav, iconnav;
 window.onload = function()
 {
   var name = document.getElementById("name");
-
   showvidicon = document.getElementById("showvidicon");
   iconshuffle = document.getElementById("shuffle");
   iconrepeat = document.getElementById("repeat");
@@ -14,15 +90,15 @@ window.onload = function()
   section = document.getElementById("section");
   nav = document.getElementById("nav");
   iconnav = document.getElementById("icons");
+  audioplayer = document.getElementById("audioplayer");
 
   showvidicon.style.color = "white";
   iconshuffle.style.color = "white";
   iconrepeat.style.color = "white";
-
   setTimeout(function()
   {
-    player.setVolume(2.5);
-    play();
+    player.setPlaybackQuality('144p');
+    player.playVideo();
     changeicon();
   }, 2500);
 
@@ -37,6 +113,7 @@ window.onload = function()
     section.style.animation = "frombottom 2s forwards";
     iconnav.style.visibility = "visible";
     nav.style.visibility = "visible";
+    audioplayer.style.visibility = "visible";
     //nav.style.display = "block";
   }, 3000);
 
@@ -76,11 +153,16 @@ window.onclick = function(mouse)
 
 function shownav(value)
 {
-  iconnav = document.getElementById("icons");
   if(value === 1)
+  {
     iconnav.style.animation = "goUp 1s forwards";
+    nav.style.animation = "goDown 1s forwards";
+  }
   else
+  {
     iconnav.style.animation = "goDown 1s forwards";
+    nav.style.animation = "goUp 1s forwards";
+  }
 }
 
 
@@ -106,17 +188,8 @@ function setvolume(volume)
 function next()
 {
   var icon = document.getElementById("shuffle");
-  if(icon.style.color == "white")
-  {
-    if(tracknumber == 5)
-      tracknumber = 1;
-    else
-      tracknumber++;
-  }
-  else
-    random();
   changeicon();
-  play();
+  player.nextVideo();
 }
 
 
@@ -133,24 +206,26 @@ function random()
 
 function previous()
 {
-  if(tracknumber == 1)
-    tracknumber = 5;
-  else
-    tracknumber--;
+  player.previousVideo();
   changeicon();
-  play();
 }
 
-
+var shuffleon = false;
 function shuffle()
 {
   var iconshuffle = document.getElementById("shuffle");
   if(iconshuffle.style.color === "white")
+  {
     iconshuffle.style.color = "#007fff";
+    shuffleon = true;
+    setShuffle(shuffleon);
+    console.log(shuffleon);
+  }
   else
   {
     iconshuffle.style.color = "white";
-    tracknumber = safetracknumber;
+    shuffleon = false;
+    setShuffle(shuffleon);
   }
 }
 
@@ -159,22 +234,30 @@ function repeat()
 {
   var iconrepeat = document.getElementById("repeat");
   if(iconrepeat.style.color === "white")
+  {
     iconrepeat.style.color = "#007fff";
+  }
   else
+  {
     iconrepeat.style.color = "white";
+    }
 }
+/*
 var safetracknumber;
 function play()
 {
   var musicvideo = document.getElementById("player");
   safetracknumber = tracknumber;
   audio = document.getElementById("audio");
-  /*audio.play();*/
+  /*audio.play();
   var songname = document.getElementById("songname");
+  /*
     if(tracknumber === 1)
     {
+      /*
       songname.textContent = "Luis Fonsi & Daddy Yankee ft. Justin Bieber - Despacito (El Bee X Chunky Dip Remix)";
       player.loadVideoById('kZFHX21QwIw');
+
     }
     else if(tracknumber === 2)
     {
@@ -198,21 +281,19 @@ function play()
     }
   audio.addEventListener('ended', NextSong);
 }
+*/
 
-var test = 0.00;
 function changeicon1()
 {
   var icon = document.getElementById("playpausebutton");
   if(icon.textContent === "play_arrow")
   {
     icon.textContent ="pause";
-    player.seekTo(test);
     player.playVideo();
   }
   else
   {
     icon.textContent = "play_arrow";
-    test = player.getCurrentTime();
     player.pauseVideo();
   }
 }
@@ -263,9 +344,10 @@ function showvid()
     logo.style.display="none";
     logo1.style.display="none";
     clickvideo.style.transform = "scale(1)";
+    player.setPlaybackQuality('default');
     if(icon.textContent === "play_arrow")
     {
-      player.playVideo(test);
+      player.playVideo();
       icon.textContent = "pause";
     }
   }
@@ -276,57 +358,6 @@ function showvid()
     logo.style.display="block";
     logo.style.animation="none";
     logo1.style.display="block";
+    player.setPlaybackQuality('small');
   }
 }
-
-
-
-/* YOUTUBE VIDEO PLAYER */
-var tag = document.createElement('script');
-tag.src = "https://www.youtube.com/iframe_api";
-
-var firstScriptTag = document.getElementsByTagName('script')[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-
-function onYouTubeIframeAPIReady()
-{
-  player = new YT.Player('player', {
-    playerVars: {
-      'controls': 0,
-      'autohide': 1,
-      'showinfo' : 0, // <- This part here
-      'wmode': 'opaque',
-      'rel': 0,
-      'fs' : 0,
-      'disablekb' : 1,
-      'modestbranding' : 1,
-      'playsinline' : 1
-    },
-    events: {
-      'onStateChange': onPlayerStateChange
-    }
-  })
-}
-// autoplay video
-/*function onPlayerReady(event) {
-    event.target.playVideo();
-}*/
-// 5. The API calls this function when the player's state changes.
-//    The function indicates that when playing a video (state=1),
-//    the player should play for six seconds and then stop.
-var done = false;
-function onPlayerStateChange(event) {
-  if (event.data === 0) {
-    done = true;
-    NextSong();
-  }
-}
-
-// when video ends
-/*
-function onPlayerStateChange(event) {
-    if(event.data === 0) {
-        alert('done');
-    }
-}*/
