@@ -3,6 +3,7 @@
   <head>
     <title>HyperMusic</title>
     <link href="css/normalize.css" type="text/css" rel="stylesheet">
+    <link href="css/responsive.css" type="text/css" rel="stylesheet">
     <link href="css/style.css" type="text/css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -11,7 +12,7 @@
     <script language="JavaScript" type="text/javascript" src="JS/script.js"></script>
     <meta charset="utf-8">
     <link rel="icon" href="pictures/logo/logodark.png" type="image/gif" sizes="16x16">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   </head>
   <body>
     <section id="section">
@@ -55,7 +56,7 @@
                 <i class="material-icons" id="repeat" onclick=repeat()>repeat_one</i>
               </div>
               <div id="volume" class="flex-center">
-                <i class="material-icons" id="volumebutton" onclick=showvolumeslider()>volume_up</i>
+                <i class="material-icons" id="volumebutton" onclick=showvolumeslider(1)>volume_up</i>
                 <input type="range" min="0" max="25" step="1" value="2.5" oninput=setvolume(this.value) id="volumeslider"></input>
               </div>
             <audio id="audio" type="audio/mpeg"/>

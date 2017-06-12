@@ -121,7 +121,6 @@ section
 {
   visibility: hidden;
   position: absolute;
-  z-index: 99;
   overflow: hidden;
 }
 
@@ -166,6 +165,7 @@ a
 }
 .navi
 {
+  z-index: 99;
   user-select: none;
   height: 60px;
   width: 100%;
@@ -260,7 +260,7 @@ footer
 {
   user-select: none;
   border-top: 1px solid lightgray;
-  height: 40px;
+  height: 39px;
   width: 100%;
   background-color: #1e1e1e;
 }
@@ -290,11 +290,17 @@ footer
   justify-content: space-around;
   align-items: center;
 }
+#volumebutton
+{
+  z-index: 1;
+  transition: .5s ease-in-out;
+}
 #volumeslider
 {
-  display: none;
+  opacity: 0;
   position: absolute;
-  width: 120px;
+  width: 10vw;
+  transition: .5s ease-in-out;
 }
 input {
   -webkit-appearance: none;
@@ -329,7 +335,6 @@ input::-moz-slider-thumb{
 #introbackground
 {
   position: absolute;
-  background-image: none;
   background-color: black;
   height: 100vh;
   width: 100vw;
@@ -338,23 +343,19 @@ input::-moz-slider-thumb{
 }
 #clickvideo
 {
-  border: 1px solid red;
-  z-index: -1;
-  transition: 2s linear;
   opacity: 0;
   position: absolute;
-  top: 0;
-  left: 0;
   height: 100%;
   width: 100%;
+  transition: 2s ease-in-out;
+  transform: scale(1.5);
 }
 #player
 {
-  position: relative;
-  transform: scale(1.5);
-  width: 100%;
   height: 100%;
+  width: 100%;
   pointer-events: none;
+  z-index: -1;
 }
 
 @keyframes goUp

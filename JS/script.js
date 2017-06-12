@@ -103,14 +103,11 @@ window.onload = function()
     section.style.transition = "transition: 1s ease-in-out";
     name.style.display = "none";
     document.getElementById("dj").style.display = "flex";
-    //section.style.top = "100vh";
-    //section.style.transition = "scale(0)";
-    //section.style.opacity = "0";
+    document.getElementById("dj").style.marginTop = "60px";
     section.style.animation = "frombottom 2s forwards";
     iconnav.style.visibility = "visible";
     nav.style.visibility = "visible";
     audioplayer.style.visibility = "visible";
-    //nav.style.display = "block";
   }, 3000);
 }
 var tracknumber = 1;
@@ -127,10 +124,10 @@ window.onclick = function(mouse)
 {
   button = document.getElementById("volumebutton");
   slider = document.getElementById("volumeslider");
-  if(clickcount === 2 && (slider.style.display === "block") && (button.style.display === "none")  && (mouse.target.id !== "volumeslider"))
+  if(button.style.opacity === "0" && clickcount === 2 && (mouse.target.id !== "volumeslider"))
   {
-    button.style.display = "";
-    slider.style.display = "none";
+    button.style.opacity ="1";
+    slider.style.opacity ="0";
   }
   clickcount = 1;
   clickcount++;
@@ -152,17 +149,14 @@ function shownav(value)
 }
 
 
-function showvolumeslider()
+function showvolumeslider(value)
 {
   clickcount = 0;
   button = document.getElementById("volumebutton");
   slider = document.getElementById("volumeslider");
-  if(button.style.display === "")
-  {
-    button.style.display = "none";
-    slider.style.display = "block";
-    clickcount++;
-  }
+  button.style.opacity ="0";
+  slider.style.opacity ="1";
+  clickcount++;
 }
 
 function setvolume(volume)
@@ -333,14 +327,12 @@ function showvid()
     clickvideo.style.zIndex = "1";
      var playbackQuality = player.getPlaybackQuality();
      var suggestedQuality = 'hd1080';
-       if( playbackQuality !== 'hd1080')
-       {
-         console.log("Setting quality to " + suggestedQuality );
-         player.setPlaybackQuality( suggestedQuality );
-       }
-    //alert(player.getAvailableQualityLevels());
-    //player.setPlaybackQuality('highres');
-    if(icon.textContent === "play_arrow")
+     if( playbackQuality !== 'hd1080')
+     {
+       console.log("Setting quality to " + suggestedQuality );
+       player.setPlaybackQuality( suggestedQuality );
+     }
+    else if(icon.textContent === "play_arrow")
     {
       player.playVideo();
       icon.textContent = "pause";
@@ -361,5 +353,8 @@ function showvid()
     setTimeout(function(){
       logo.style.opacity="1";
     }, 1000);
+    setTimeout(function(){
+      clickvideo.style.zIndex = "-1";
+    }, 2000);
   }
 }
