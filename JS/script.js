@@ -40,12 +40,13 @@ function onYouTubeIframeAPIReady()
 //    the player should play for six seconds and then stop.
 function onPlayerError()
 {
+  playlisttrack++;
   player.nextVideo();
 }
 
 function onPlayerReady(event)
 {
-  event.target.setPlaybackQuality('small');
+  event.target.setPlaybackQuality('tiny');
   event.target.setVolume(2.5);
   event.target.setLoop(true);
   event.target.cuePlaylist(
@@ -60,10 +61,6 @@ function onPlayerStateChange(event) {
   document.getElementById("songname").textContent = player.getVideoData().title;
   var iconrepeat = document.getElementById("repeat");
   var showvidicon = document.getElementById("showvidicon");
-  if (event.data === 3 && showvidicon.style.color === "white")
-  {
-      event.target.setPlaybackQuality('small');
-  }
 }
 function setShuffle(shuffle)
 {
@@ -97,7 +94,6 @@ window.onload = function()
   iconrepeat.style.color = "white";
   setTimeout(function()
   {
-    player.setPlaybackQuality('144p');
     player.playVideo();
     changeicon();
   }, 2500);
@@ -116,16 +112,6 @@ window.onload = function()
     audioplayer.style.visibility = "visible";
     //nav.style.display = "block";
   }, 3000);
-
-  /* INITIALIZE WITH LOW VOLUME */
-  {
-    setTimeout(
-      function()
-      {
-      var element = document.getElementById("logo1");
-      element.style.opacity = "1";
-    }, 3000);
-  }
 }
 var tracknumber = 1;
 function playpause()
@@ -190,6 +176,7 @@ function next()
   var icon = document.getElementById("shuffle");
   changeicon();
   player.nextVideo();
+  player.setPlaybackQuality('small');
 }
 
 
@@ -330,7 +317,6 @@ function NextSong()
   play();
 }
 
-
 function showvid()
 {
   var icon = document.getElementById("playpausebutton");
@@ -341,10 +327,18 @@ function showvid()
   if(showvidicon.style.color === "white")
   {
     showvidicon.style.color = "#007fff";
-    logo.style.display="none";
-    logo1.style.display="none";
-    clickvideo.style.transform = "scale(1)";
-    player.setPlaybackQuality('default');
+    logo.style.opacity = "0";
+    //clickvideo.style.transform = "scale(1)";
+    clickvideo.style.opacity="1";
+     var playbackQuality = player.getPlaybackQuality();
+     var suggestedQuality = 'hd1080';
+       if( playbackQuality !== 'hd1080')
+       {
+         console.log("Setting quality to " + suggestedQuality );
+         player.setPlaybackQuality( suggestedQuality );
+       }
+    //alert(player.getAvailableQualityLevels());
+    //player.setPlaybackQuality('highres');
     if(icon.textContent === "play_arrow")
     {
       player.playVideo();
@@ -353,11 +347,18 @@ function showvid()
   }
   else
   {
+    var playbackQuality = player.getPlaybackQuality();
+    var suggestedQuality = 'tiny';
+    if( playbackQuality !== 'tiny') {
+      console.log("Setting quality to " + suggestedQuality );
+      player.setPlaybackQuality( suggestedQuality );
+  }
     showvidicon.style.color = "white";
-    clickvideo.style.transform = "scale(0)";
-    logo.style.display="block";
+    clickvideo.style.opacity = "0";
     logo.style.animation="none";
-    logo1.style.display="block";
     player.setPlaybackQuality('small');
+    setTimeout(function(){
+      logo.style.opacity="1";
+    }, 1000);
   }
 }
