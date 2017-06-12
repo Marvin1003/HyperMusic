@@ -330,6 +330,7 @@ function showvid()
     logo.style.opacity = "0";
     //clickvideo.style.transform = "scale(1)";
     clickvideo.style.opacity="1";
+    clickvideo.style.zIndex = "1";
      var playbackQuality = player.getPlaybackQuality();
      var suggestedQuality = 'hd1080';
        if( playbackQuality !== 'hd1080')
