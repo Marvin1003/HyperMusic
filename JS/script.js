@@ -97,6 +97,10 @@ window.onload = function()
     player.playVideo();
     changeicon();
   }, 1000);
+  setTimeout(function()
+  {
+    document.getElementById("intro").remove();
+  },2500)
 }
 var tracknumber = 1;
 function playpause()
