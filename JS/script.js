@@ -142,7 +142,6 @@ function shownav()
   }
 }
 
-
 function showvolumeslider(value)
 {
   clickcount = 0;
@@ -317,7 +316,6 @@ function showvid()
   {
     showvidicon.style.color = "#007fff";
     logo.style.display = "none";
-    //clickvideo.style.transform = "scale(1)";
     clickvideo.style.opacity="1";
     clickvideo.style.zIndex = "1";
      var playbackQuality = player.getPlaybackQuality();
@@ -335,11 +333,36 @@ function showvid()
     if( playbackQuality !== 'tiny') {
       console.log("Setting quality to " + suggestedQuality );
       player.setPlaybackQuality( suggestedQuality );
+      clickvideo.style.zIndex = "-99";
     }
     showvidicon.style.color = "white";
     clickvideo.style.opacity = "0";
     player.setPlaybackQuality('small');
     logo.style.display = "block";
-    clickvideo.style.zIndex = "-1";
+  }
+}
+var clicker = 0;
+function cloudrap()
+{
+  clicker++;
+  var cloud = document.getElementById("cloud");
+  if(clicker%2 == 1)
+  {
+    cloud.style.color = "#007fff";
+    playlisttrack = 2;
+    player.loadPlaylist(
+      {
+        list : 'PLT4oRPVflrCdGoo_k-qZBfx3McKFgBzpg',
+        index : playlisttrack,
+      })
+  }
+  else
+  {
+    cloud.style.color = "white";
+    player.loadPlaylist(
+      {
+        listType: 'playlist',
+        list: 'PLWaEl4Kd1431oovMu8hTTThjAKnS--QXu',
+      })
   }
 }
