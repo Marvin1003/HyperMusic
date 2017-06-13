@@ -16,17 +16,28 @@ body,html
   background-repeat: no-repeat;
   z-index: -99;
 }
+#intro
+{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: black;
+  z-index: 99;
+  animation: getOut 1s 1.5s forwards;
+}
+@keyframes getOut
+{
+  from{left: 0}
+  to{left: 100vw}
+}
+
 #dj
 {
+  margin-top: 60px;
   position: relative;
-  display: none;
   background-image: url("../pictures/wallpaper/dj.jpg");
-
-}
-@keyframes frombottom
-{
-  from{opacity: 0}
-  to{opacity: 1}
 }
 #cover
 {
@@ -41,14 +52,16 @@ body,html
   display: flex;
   flex-direction: column;
   align-items: center;
+  z-index: 99;
 }
+/*
 #name
 {
   position: relative;
   bottom: -100vh;
   padding: 10px 30px 0 30px;
   color: white;
-  animation: name 1s 1.5s forwards;
+  animation: name 1s .5s;
   letter-spacing: 2px;
   white-space: nowrap;
   border-top: 1px solid lightgray;
@@ -57,11 +70,10 @@ body,html
 {
   from{bottom: -100vh}
   to{bottom: 0}
-}
+}*/
 #logo
 {
-  transition: 1s ease-in-out;
-  animation: logo 2s forwards;
+  animation: logo 1.5s;
 }
 
 
@@ -69,19 +81,7 @@ body,html
 {
     0%
     {
-        transform: scale(10);
-    }
-    60%
-    {
-        transform: scale(0.85);
-    }
-    80%
-    {
-        transform: scale(1.2);
-    }
-    100%
-    {
-        transform: scale(1);
+      transform: scale(1);
     }
 }
 main
@@ -119,21 +119,26 @@ section
 }
 #icons
 {
-  visibility: hidden;
+  user-select: none;
   position: absolute;
-  overflow: hidden;
+  border-top: 1px solid rgba(255,255,255,0.5);
+  top: -1;
+  z-index: 3;
 }
-
+#expand
+{
+  font-size: 40px;
+}
 header span
 {
-  width:22%;
+  width:21%;
   display: inline-block;
   text-align: center;
 }
 header span:nth-of-type(3)
 {
   margin-top: 4px;
-  width: 12%;
+  width: 16%;
 }
 header  i
 {
@@ -165,8 +170,6 @@ a
 }
 .navi
 {
-  z-index: 99;
-  user-select: none;
   height: 60px;
   width: 100%;
   white-space: nowrap;
@@ -177,22 +180,24 @@ a
 
 nav
 {
-  visibility: hidden;
   position: absolute;
-  top: 0;
-  z-index: 1;
+  z-index: 2;
 }
-nav span
-{
-  width:22%;
-  display: inline-block;
+nav span{
+
+  width: 20%;
   text-align: center;
 }
-
-nav span:nth-of-type(3)
+/*nav span:nth-of-type(2)
 {
-  margin-top: 4px;
-  width: 12%;
+  margin-right: 15vw;
+}*/
+nav img
+{
+  user-select: none;
+  margin-top: 5px;
+  height: 90px;
+  width: 150px;
 }
 nav li, nav a
 {
@@ -204,17 +209,6 @@ nav li, nav a
 {
   from{opacity: 0}
   to{ opacity: 1}
-}
-#audioplayer
-{
-  visibility: hidden;
-  transform: scale(0);
-  animation: zoom 1s 1.7s forwards;
-}
-@keyframes zoom
-{
-  from{transform: scale(0)}
-  to{transform: scale(1)}
 }
 #song
 {
@@ -254,7 +248,7 @@ nav li, nav a
 }
 footer
 {
-  z-index: 1;
+  z-index: 10;
 }
 #audiocontrol
 {
@@ -331,22 +325,13 @@ input::-moz-slider-thumb{
   margin-top: -2px;
   height: 30px;
 }
-
-#introbackground
-{
-  position: absolute;
-  background-color: black;
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
-  z-index: 99;
-}
 #clickvideo
 {
   opacity: 0;
   position: absolute;
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
+
   transition: 2s ease-in-out;
   transform: scale(1.5);
 }
@@ -360,11 +345,47 @@ input::-moz-slider-thumb{
 
 @keyframes goUp
 {
-  from{top: 0px}
-  to{top: -60px}
+  from{top: 60px}
+  to{top: -1px}
 }
 @keyframes goDown
 {
-  from{top: -60px}
-  to{top: 0px}
+  from{top: -1px}
+  to{top: 60px}
+}
+
+
+#spinner {
+  width: 75px;
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+  animation: fadein 1s 1s reverse ease-in-out forwards;
+}
+#spinner > div {
+  width: 18px;
+  height: 18px;
+  background-color: #fff;
+  border-radius: 100%;
+  animation: bounce 1.2s infinite ease-in-out;
+
+}
+#spinner .bounce3 {
+  animation-delay: 0.32s;
+}
+
+#spinner .bounce2 {
+  animation-delay: 0.16s;
+}
+
+@keyframes bounce{
+  0%{
+    transform: scale(0);
+    }
+ 50%{
+    transform: scale(1.0);
+    }
+100%{
+    transform: scale(0);
+    }
 }

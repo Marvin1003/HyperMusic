@@ -19,22 +19,28 @@
       <header class="navi" id="icons">
         <span><a href="https://soundcloud.com/hypermusicofficial" target="_blank"><i class="fa fa-soundcloud fa-2x" aria-hidden="true"></i></a></span>
         <span><a href="https://www.instagram.com/hypermusicofficial/" target="_blank"><i class="fa fa-instagram fa-2x" aria-hidden="true"></i></a></span>
-        <span><i class="material-icons" onclick=shownav(1)>dehaze</i></span>
+        <span><i class="material-icons" onclick=shownav() id="expand">expand_more</i></span>
         <span><a href="https://plus.google.com/+HyperMusicOfficial" target="_blank"><i class="fa fa-google-plus-official fa-2x" aria-hidden="true"></i></a></span>
         <span><a href="https://www.youtube.com/hypermusicofficial" target="_blank"><i class="fa fa-youtube-play fa-2x" aria-hidden="true"></i></a></span>
       </header>
       <nav class="navi" id="nav">
-        <span><a href="#">latest uploads</a></span>
+        <span><a href="#">uploads</a></span>
         <span><a href="#">submission</a></span>
-        <span><i class="material-icons" onclick=shownav(2)>dehaze</i></span>
+        <span><img src="pictures/logo/hyperation.png" alt="HyperNation"></span>
         <span><a href="#">booking</a></span>
         <span><a href="#">contact</a></span>
       </nav>
+      <div id="intro"></div>
       <main id="dj">
         <div id="clickvideo" onclick=playpause(1)><div id="player"></div></div>
         <div class="logo">
           <img id="logo" src="pictures/logo/logodark.png" alt="Logodark">
-          <h3 id="name">I bims eins Timo</h3>
+          <div id="spinner">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+          </div>
+          <!--<h3 id="name">I bims eins Timo</h3>-->
         </div>
       </main>
       <footer>

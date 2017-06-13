@@ -76,14 +76,14 @@ function onPlayerStateChange(event) {
     }
 }*/
 /* INITIALIZE VOLUME */
-var audio, showvidicon, iconshuffle, iconrepeat, main, section, nav, iconnav;
+var audio, showvidicon, iconshuffle, iconrepeat, main, section, nav, iconnav, name;
 window.onload = function()
 {
-  var name = document.getElementById("name");
+  name = document.getElementById("name");
   showvidicon = document.getElementById("showvidicon");
   iconshuffle = document.getElementById("shuffle");
   iconrepeat = document.getElementById("repeat");
-  main = document.getElementById("dj").id = "introbackground";
+  main = document.getElementById("dj");
   section = document.getElementById("section");
   nav = document.getElementById("nav");
   iconnav = document.getElementById("icons");
@@ -96,19 +96,7 @@ window.onload = function()
   {
     player.playVideo();
     changeicon();
-  }, 2500);
-
-  setTimeout( function() {
-    main = document.getElementById("introbackground").id = "dj";
-    section.style.transition = "transition: 1s ease-in-out";
-    name.style.display = "none";
-    document.getElementById("dj").style.display = "flex";
-    document.getElementById("dj").style.marginTop = "60px";
-    section.style.animation = "frombottom 2s forwards";
-    iconnav.style.visibility = "visible";
-    nav.style.visibility = "visible";
-    audioplayer.style.visibility = "visible";
-  }, 3000);
+  }, 1000);
 }
 var tracknumber = 1;
 function playpause()
@@ -133,18 +121,20 @@ window.onclick = function(mouse)
   clickcount++;
 }
 
-
-function shownav(value)
+var counter = 0;
+function shownav()
 {
-  if(value === 1)
+  counter++;
+  var expand = document.getElementById("expand");
+  if(counter%2 !== 0)
   {
-    iconnav.style.animation = "goUp 1s forwards";
-    nav.style.animation = "goDown 1s forwards";
+    iconnav.style.animation = "goDown 1s forwards";
+    expand.style.transform= "rotate(180deg)";
   }
   else
   {
-    iconnav.style.animation = "goDown 1s forwards";
-    nav.style.animation = "goUp 1s forwards";
+    iconnav.style.animation = "goUp 1s forwards";
+    expand.style.transform= "rotate(360deg)";
   }
 }
 
@@ -316,12 +306,13 @@ function showvid()
   var icon = document.getElementById("playpausebutton");
   var showvidicon = document.getElementById("showvidicon");
   var logo = document.getElementById("logo");
-  var logo1 = document.getElementById("logo1")
   var clickvideo = document.getElementById("clickvideo");
+
+  logo.style.animation = "none";
   if(showvidicon.style.color === "white")
   {
     showvidicon.style.color = "#007fff";
-    logo.style.opacity = "0";
+    logo.style.display = "none";
     //clickvideo.style.transform = "scale(1)";
     clickvideo.style.opacity="1";
     clickvideo.style.zIndex = "1";
@@ -332,11 +323,6 @@ function showvid()
        console.log("Setting quality to " + suggestedQuality );
        player.setPlaybackQuality( suggestedQuality );
      }
-    else if(icon.textContent === "play_arrow")
-    {
-      player.playVideo();
-      icon.textContent = "pause";
-    }
   }
   else
   {
@@ -345,16 +331,11 @@ function showvid()
     if( playbackQuality !== 'tiny') {
       console.log("Setting quality to " + suggestedQuality );
       player.setPlaybackQuality( suggestedQuality );
-  }
+    }
     showvidicon.style.color = "white";
     clickvideo.style.opacity = "0";
-    logo.style.animation="none";
     player.setPlaybackQuality('small');
-    setTimeout(function(){
-      logo.style.opacity="1";
-    }, 1000);
-    setTimeout(function(){
-      clickvideo.style.zIndex = "-1";
-    }, 2000);
+    logo.style.display = "block";
+    clickvideo.style.zIndex = "-1";
   }
 }
