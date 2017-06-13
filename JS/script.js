@@ -31,13 +31,7 @@ function onYouTubeIframeAPIReady()
     }
   })
 }
-// autoplay video
-/*function onPlayerReady(event) {
-    event.target.playVideo();
-}*/
-// 5. The API calls this function when the player's state changes.
-//    The function indicates that when playing a video (state=1),
-//    the player should play for six seconds and then stop.
+
 function onPlayerError()
 {
   playlisttrack++;
@@ -67,14 +61,6 @@ function setShuffle(shuffle)
     player.setShuffle(shuffle);
 }
 
-
-// when video ends
-/*
-function onPlayerStateChange(event) {
-    if(event.data === 0) {
-        alert('done');
-    }
-}*/
 /* INITIALIZE VOLUME */
 var audio, showvidicon, iconshuffle, iconrepeat, main, section, nav, iconnav, name;
 window.onload = function()
