@@ -359,7 +359,7 @@ input::-moz-slider-thumb{
 }
 
 
-#spinner {
+#spinner {      /*MAKE THIS ANIMATION ONLY TO WINDOW.ONLOAD*/
   width: 75px;
   text-align: center;
   display: flex;

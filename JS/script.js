@@ -351,4 +351,5 @@ function cloudrap()
         list: 'PLWaEl4Kd1431oovMu8hTTThjAKnS--QXu',
       })
   }
+  changeicon();
 }
