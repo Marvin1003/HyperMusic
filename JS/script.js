@@ -58,7 +58,12 @@ function onPlayerStateChange(event) {
   if(event.data === 1)
   {
     changeicon();
-    document.getElementById("intro").remove();
+
+    document.getElementById("intro").style.animation = "getOut 1s ease-in-out";
+    setTimeout(function()
+    {
+      document.getElementById("intro").remove();
+    }, 1000);
     document.getElementById("spinner").style.animation = "fadein .5s reverse ease-in-out forwards";
   }
 }
@@ -360,4 +365,32 @@ function cloudrap()
       })
   }
   changeicon();
+}
+var click = 0;
+function easteregg()
+{
+  click++;
+  var box = document.getElementById("eastereggs");
+  var h1 = document.createElement("h1");
+  var cock = document.getElementById("cock");
+  if(click %2 != 0)
+  {
+
+    h1.id = "cock";
+    h1.textContent = "Sucka My Cocka";
+    document.getElementById("dj").style.filter = "blur(5px)";
+    box.appendChild(h1);
+    img = new Image();
+    img.src = 'pictures/easteregg/penis.png';
+    box.appendChild(img);
+    img.style.position = "relative";
+    img.style.animation ="turn 4s linear infinite";
+  }
+  else {
+    var test = document.querySelector("img");
+    test.parentNode.removeChild(test);
+    cock.parentNode.removeChild(cock);
+    document.getElementById("dj").style.filter = "blur(0)";
+
+  }
 }
