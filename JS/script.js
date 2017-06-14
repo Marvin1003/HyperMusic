@@ -40,7 +40,7 @@ function onPlayerError()
 
 function onPlayerReady(event)
 {
-  event.target.setPlaybackQuality('tiny');
+  //event.target.setPlaybackQuality('tiny');
   event.target.setVolume(2.5);
   event.target.setLoop(true);
   event.target.cuePlaylist(
@@ -318,12 +318,12 @@ function showvid()
     var suggestedQuality = 'tiny';
     if( playbackQuality !== 'tiny') {
       console.log("Setting quality to " + suggestedQuality );
-      player.setPlaybackQuality( suggestedQuality );
+      //player.setPlaybackQuality( suggestedQuality );
       clickvideo.style.zIndex = "-99";
     }
     showvidicon.style.color = "white";
     clickvideo.style.opacity = "0";
-    player.setPlaybackQuality('small');
+    //player.setPlaybackQuality('small');
     logo.style.display = "block";
   }
 }
