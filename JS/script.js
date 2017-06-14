@@ -37,13 +37,13 @@ function onPlayerError()
   playlisttrack++;
   player.nextVideo();
 }
-
+var event;
 function onPlayerReady(event)
 {
-  //event.target.setPlaybackQuality('tiny');
+  event.target.setPlaybackQuality('hd1080');
   event.target.setVolume(2.5);
   event.target.setLoop(true);
-  event.target.cuePlaylist(
+  event.target.loadPlaylist(
     {
       listType: 'playlist',
       list: 'PLWaEl4Kd1431oovMu8hTTThjAKnS--QXu',
@@ -55,6 +55,12 @@ function onPlayerStateChange(event) {
   document.getElementById("songname").textContent = player.getVideoData().title;
   var iconrepeat = document.getElementById("repeat");
   var showvidicon = document.getElementById("showvidicon");
+  if(event.data === 1)
+  {
+    changeicon();
+    document.getElementById("intro").remove();
+    document.getElementById("spinner").style.animation = "fadein .5s reverse ease-in-out forwards";
+  }
 }
 function setShuffle(shuffle)
 {
@@ -78,15 +84,17 @@ window.onload = function()
   showvidicon.style.color = "white";
   iconshuffle.style.color = "white";
   iconrepeat.style.color = "white";
-  setTimeout(function()
-  {
-    player.playVideo();
-    changeicon();
-  }, 1000);
-  setTimeout(function()
+  /*
+  var playerstate;
+  do{
+    playerstate = player.getPlayerState();
+  }while(playerstate !== 1)
+  document.getElementById("intro").remove();
+  console.log(player.getPlayerState());
+  /*setTimeout(function()
   {
     document.getElementById("intro").remove();
-  },2500)
+  },2500)*/
 }
 var tracknumber = 1;
 function playpause()
@@ -135,6 +143,7 @@ function showvolumeslider(value)
   slider = document.getElementById("volumeslider");
   button.style.opacity ="0";
   slider.style.opacity ="1";
+  slider.style.display ="block";
   clickcount++;
 }
 
@@ -315,7 +324,6 @@ function showvid()
   else
   {
     var playbackQuality = player.getPlaybackQuality();
-    var suggestedQuality = 'tiny';
     if( playbackQuality !== 'tiny') {
       console.log("Setting quality to " + suggestedQuality );
       //player.setPlaybackQuality( suggestedQuality );

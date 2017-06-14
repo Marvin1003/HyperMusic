@@ -24,7 +24,6 @@ body,html
   width: 100vw;
   background-color: black;
   z-index: 99;
-  animation: getOut 1s 1.5s forwards;
 }
 @keyframes getOut
 {
@@ -293,6 +292,7 @@ footer
 }
 #volumeslider
 {
+  display: none;
   opacity: 0;
   position: absolute;
   width: 10vw;
@@ -364,7 +364,6 @@ input::-moz-slider-thumb{
   text-align: center;
   display: flex;
   justify-content: space-around;
-  animation: fadein 1s 1s reverse ease-in-out forwards;
 }
 #spinner > div {
   width: 18px;
