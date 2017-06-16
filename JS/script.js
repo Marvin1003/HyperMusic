@@ -436,6 +436,7 @@ document.onkeydown = function(event)
         else
         {
           sperma.style.display = "none";
+          sperma.style.bottom = "0";
         }
       }
     }
