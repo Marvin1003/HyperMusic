@@ -367,30 +367,79 @@ function cloudrap()
   changeicon();
 }
 var click = 0;
+var check = false;
+var field = document.getElementById("playfield");
+var cockmover = document.getElementById("move");
+var h1 = document.createElement("h1");
+var sperm = document.getElementById("sperm")
 function easteregg()
 {
   click++;
-  var box = document.getElementById("eastereggs");
-  var h1 = document.createElement("h1");
-  var cock = document.getElementById("cock");
   if(click %2 != 0)
   {
 
-    h1.id = "cock";
-    h1.textContent = "Sucka My Cocka";
+    //h1.id = "cock";
+    //h1.textContent = "Sucka My Cocka";
+    var div = document.createElement("div");
+    div.id = "move";
+    playfield.appendChild(div);
+    sperm = new Image();
+    sperm.src = 'pictures/easteregg/sperma.png';
+    sperm.id = "sperma";
+    div.appendChild(sperm);
     document.getElementById("dj").style.filter = "blur(5px)";
-    box.appendChild(h1);
     img = new Image();
     img.src = 'pictures/easteregg/penis.png';
-    box.appendChild(img);
-    img.style.position = "relative";
-    img.style.animation ="turn 4s linear infinite";
+    div.appendChild(img);
+    img.id ="penis";
+    check = true;
+  //  img.style.animation ="turn 4s linear infinite";
   }
   else {
-    var test = document.querySelector("img");
-    test.parentNode.removeChild(test);
-    cock.parentNode.removeChild(cock);
+    playfield.removeChild(move);
+    //cock.parentNode.removeChild(cock);
     document.getElementById("dj").style.filter = "blur(0)";
+    check = false;
 
   }
+}
+function moveCock(event)
+{
+  if(check === true)
+  {
+    cock = document.getElementById("penis");
+    var positionX = cock.getBoundingClientRect().left;
+    mouseX = event.clientX;
+    cock.style.left = mouseX + "px";
+  }
+}
+var spacecounter = 0;
+document.onkeydown = function()
+{
+
+  if(event.keyCode === 32 && check === true)
+  {
+    spacecounter++;
+    cock = document.getElementById("penis");
+    sperma.style.marginLeft = "33px"
+    sperma.style.display = "block";
+    posX = cock.getBoundingClientRect().left;
+    sperma.style.left = posX + "px";
+    var height = document.body.clientHeight;
+    var i = 110;
+    var distance = height;
+    updateScreen();
+      function updateScreen()
+      {
+        if(++i < distance)
+        {
+          sperma.style.bottom = i + "px";
+          setTimeout(updateScreen, 0.1);
+        }
+        else
+        {
+          sperma.style.display = "none";
+        }
+      }
+    }
 }

@@ -22,20 +22,42 @@ body,html
   left: 0;
   height: 5px;
   width: 5px;
-  z-index: 99999;
+  border: 1px solid red;
+  z-index: 100;
 }
 #cock
+{
+  position:absolute;
+  height: 100vh;
+  width: 100vw;
+  color: white;
+}
+#playfield
 {
   position: absolute;
   height: 100vh;
   width: 100vw;
-  font-size: 100px;
-  display: flex;
-  align-items: center;
-  color: white;
-  text-align: center;
-  z-index: 1;
-  text-shadow: 1px 1px 5px black;
+  z-index: 99;
+}
+#penis
+{
+  position: absolute;
+  height: 150px;
+  bottom: 0;
+  left: 0;
+}
+#move
+{
+  position: absolute;
+  bottom: 0;
+  height: 250px;
+}
+#sperma
+{
+  display: none;
+  position: absolute;
+  height: 80px;
+  bottom: 110px;
 }
 @keyframes turn
 {
