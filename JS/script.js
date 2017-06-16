@@ -377,9 +377,7 @@ function easteregg()
   click++;
   if(click %2 != 0)
   {
-
-    //h1.id = "cock";
-    //h1.textContent = "Sucka My Cocka";
+    playfield.style.zIndex ="99";
     var div = document.createElement("div");
     div.id = "move";
     playfield.appendChild(div);
@@ -393,11 +391,10 @@ function easteregg()
     div.appendChild(img);
     img.id ="penis";
     check = true;
-  //  img.style.animation ="turn 4s linear infinite";
   }
   else {
+    playfield.style.zIndex ="0";
     playfield.removeChild(move);
-    //cock.parentNode.removeChild(cock);
     document.getElementById("dj").style.filter = "blur(0)";
     check = false;
 
