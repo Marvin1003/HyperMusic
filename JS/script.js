@@ -430,6 +430,7 @@ document.onkeydown = function(event)
       {
         if(++i < distance)
         {
+          i+=3;
           sperma.style.bottom = i + "px";
           setTimeout(updateScreen, 0.1);
         }
