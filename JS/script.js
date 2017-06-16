@@ -414,10 +414,10 @@ function moveCock(event)
   }
 }
 var spacecounter = 0;
-document.onkeydown = function()
+document.onkeydown = function(event)
 {
 
-  if(event.keyCode === 32 && check === true)
+  if(event.keyCode === 32  || event.which && check === true)
   {
     spacecounter++;
     cock = document.getElementById("penis");
