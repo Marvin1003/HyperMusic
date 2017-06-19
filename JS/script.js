@@ -40,7 +40,7 @@ function onPlayerError()
 var event;
 function onPlayerReady(event)
 {
-  event.target.setPlaybackQuality('hd1080');
+  event.target.setPlaybackQuality('highres');
   event.target.setVolume(2.5);
   event.target.setLoop(true);
   event.target.loadPlaylist(
@@ -53,6 +53,7 @@ function onPlayerReady(event)
 
 function onPlayerStateChange(event) {
   document.getElementById("songname").textContent = player.getVideoData().title;
+  event.target.setPlaybackQuality('highres');
   var iconrepeat = document.getElementById("repeat");
   var showvidicon = document.getElementById("showvidicon");
   if(event.data === 1)
@@ -153,7 +154,6 @@ function next()
   var icon = document.getElementById("shuffle");
   changeicon();
   player.nextVideo();
-  player.setPlaybackQuality('small');
 }
 
 
@@ -290,4 +290,3 @@ function showvid()
     logo.style.display = "block";
   }
 }
-var clicker = 0;
