@@ -1,7 +1,10 @@
+/*PURE JAVASCRIPT NO JQUERY */
 
 /* YOUTUBE VIDEO PLAYER */
 var playlisttrack = 0;
 var tag = document.createElement('script');
+
+/* YOUTUBE PLAYER API */
 tag.src = "https://www.youtube.com/iframe_api";
 
 var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -61,6 +64,7 @@ function onPlayerStateChange(event) {
   {
     icon.textContent ="pause";
     progressIndicator();
+    startListener();
   }
   if(event.data === 1 && !check)
   {
@@ -280,9 +284,31 @@ function showvid()
     logo.style.display = "block";
   }
 }
-var currentTime, indicator, distance, distanceOutside, positionX, barW, algo, duration;
+var currentTime, indicator, distance, distanceX, distanceOutside, positionX, barW, algo, duration;
 
+function startListener()
+{
+  indicator = document.getElementById("progressIndicator");
+  indicator.addEventListener('mousedown', slideStart);
+}
 
+function slideStart(event)
+{
+  player.pauseVideo();
+  indicator = document.getElementById("progressIndicator");
+  document.addEventListener('mousemove', moveIndicator);
+}
+function moveIndicator(event)
+{
+  document.addEventListener('mouseup', slideStop);
+  calculateDistance(event);
+  player.seekTo(time);
+}
+function slideStop(event)
+{
+  player.playVideo();
+  document.removeEventListener('mousemove', moveIndicator);
+}
 function progressIndicator()
 {
   duration = player.getDuration();
@@ -298,15 +324,22 @@ function progressIndicator()
   },500);
 }
 
-function seekTo(distance)
+function calculateDistance(distance)
 {
   distanceOutside = document.getElementById("progressBar").offsetLeft;
   barW = document.getElementById("progressBar").clientWidth;
   positionX = distance.clientX;
   duration = player.getDuration();
   indicator = document.getElementById("progressIndicator");
-  var distanceX = positionX - distanceOutside;
-  indicator.style.left = distanceX + "px" ;
+  distanceX = positionX - distanceOutside - 11;
+  time = (duration / barW) * distanceX;
+  if(distanceX < barW && distanceX > 0)
+    indicator.style.left = distanceX + "px";
+}
+
+function seekTo(distance)
+{
+  calculateDistance(distance);
   time = (duration / barW) * distanceX;
   player.seekTo(time);
 }

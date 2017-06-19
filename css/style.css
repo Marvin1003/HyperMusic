@@ -399,6 +399,7 @@ input::-moz-slider-thumb{
 }
 #progressIndicator
 {
+  cursor: pointer;
   position: relative;
   height: 22px;
   border-radius: 100%;
