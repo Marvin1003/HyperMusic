@@ -115,6 +115,7 @@ window.onclick = function(mouse)
   {
     button.style.opacity ="1";
     slider.style.opacity ="0";
+    slider.style.display ="none";
   }
   clickcount = 1;
   clickcount++;
@@ -316,7 +317,8 @@ function progressIndicator()
   barW = document.getElementById("progressBar").clientWidth;
   algo = (barW / duration) * currentTime;
   indicator = document.getElementById("progressIndicator");
-  indicator.style.left = algo + "px";
+  if(algo < barW-10)
+    indicator.style.left = algo + "px";
   duration = player.getDuration();
   setTimeout(function()
   {
@@ -333,7 +335,7 @@ function calculateDistance(distance)
   indicator = document.getElementById("progressIndicator");
   distanceX = positionX - distanceOutside - 11;
   time = (duration / barW) * distanceX;
-  if(distanceX < barW && distanceX > 0)
+  if(distanceX < barW-10 && distanceX > 0)
     indicator.style.left = distanceX + "px";
 }
 
