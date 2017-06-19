@@ -386,3 +386,22 @@ input::-moz-slider-thumb{
     transform: scale(0);
     }
 }
+#progressBar
+{
+  position: relative;
+  background-color: rgba(255,255,255,0.8);
+  margin: 10px auto;
+  height: 8px;
+  width: 75vw;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+}
+#progressIndicator
+{
+  position: relative;
+  height: 22px;
+  border-radius: 100%;
+  width: 22px;
+  background-color: #007fff;
+}

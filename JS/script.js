@@ -14,7 +14,7 @@ function onYouTubeIframeAPIReady()
     playerVars: {
       controls: '0',
       autohide: '1',
-      showinfo : '0', // <- This part here
+      showinfo : '0',
       wmode: 'opaque',
       rel: '0',
       fs: '0',
@@ -50,22 +50,27 @@ function onPlayerReady(event)
       index: playlisttrack,
     })
 }
-
+var check = false;
 function onPlayerStateChange(event) {
   document.getElementById("songname").textContent = player.getVideoData().title;
   event.target.setPlaybackQuality('highres');
   var iconrepeat = document.getElementById("repeat");
   var showvidicon = document.getElementById("showvidicon");
+  var icon = document.getElementById("playpausebutton");
   if(event.data === 1)
   {
-    changeicon();
-
+    icon.textContent ="pause";
+    progressIndicator();
+  }
+  if(event.data === 1 && !check)
+  {
     document.getElementById("intro").style.animation = "getOut 1s ease-in-out";
     setTimeout(function()
     {
       document.getElementById("intro").remove();
     }, 1000);
     document.getElementById("spinner").style.animation = "fadein .5s reverse ease-in-out forwards";
+    check = true;
   }
 }
 function setShuffle(shuffle)
@@ -92,10 +97,6 @@ window.onload = function()
   iconrepeat.style.color = "white";
 }
 var tracknumber = 1;
-function playpause()
-{
-  changeicon1();
-}
 
 /* AUDIO PLAYER */
 /* GLOBAL OBJECTS*/
@@ -151,8 +152,6 @@ function setvolume(volume)
 
 function next()
 {
-  var icon = document.getElementById("shuffle");
-  changeicon();
   player.nextVideo();
 }
 
@@ -171,7 +170,6 @@ function random()
 function previous()
 {
   player.previousVideo();
-  changeicon();
 }
 
 var shuffleon = false;
@@ -183,7 +181,6 @@ function shuffle()
     iconshuffle.style.color = "#007fff";
     shuffleon = true;
     setShuffle(shuffleon);
-    console.log(shuffleon);
   }
   else
   {
@@ -207,7 +204,7 @@ function repeat()
     }
 }
 
-function changeicon1()
+function changeicon()
 {
   var icon = document.getElementById("playpausebutton");
   if(icon.textContent === "play_arrow")
@@ -223,12 +220,6 @@ function changeicon1()
 }
 
 
-function changeicon()
-{
-  var icon = document.getElementById("playpausebutton");
-  if(icon.textContent === "play_arrow")
-    icon.textContent ="pause";
-}
 
 function NextSong()
 {
@@ -251,7 +242,6 @@ function NextSong()
   {
     random();
   }
-  play();
 }
 
 function showvid()
@@ -289,4 +279,34 @@ function showvid()
     clickvideo.style.opacity = "0";
     logo.style.display = "block";
   }
+}
+var currentTime, indicator, distance, distanceOutside, positionX, barW, algo, duration;
+
+
+function progressIndicator()
+{
+  duration = player.getDuration();
+  currentTime = player.getCurrentTime();
+  barW = document.getElementById("progressBar").clientWidth;
+  algo = (barW / duration) * currentTime;
+  indicator = document.getElementById("progressIndicator");
+  indicator.style.left = algo + "px";
+  duration = player.getDuration();
+  setTimeout(function()
+  {
+    progressIndicator();
+  },500);
+}
+
+function seekTo(distance)
+{
+  distanceOutside = document.getElementById("progressBar").offsetLeft;
+  barW = document.getElementById("progressBar").clientWidth;
+  positionX = distance.clientX;
+  duration = player.getDuration();
+  indicator = document.getElementById("progressIndicator");
+  var distanceX = positionX - distanceOutside;
+  indicator.style.left = distanceX + "px" ;
+  time = (duration / barW) * distanceX;
+  player.seekTo(time);
 }
