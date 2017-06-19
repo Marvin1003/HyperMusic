@@ -89,23 +89,13 @@ window.onload = function()
   showvidicon.style.color = "white";
   iconshuffle.style.color = "white";
   iconrepeat.style.color = "white";
-  /*
-  var playerstate;
-  do{
-    playerstate = player.getPlayerState();
-  }while(playerstate !== 1)
-  document.getElementById("intro").remove();
-  console.log(player.getPlayerState());
-  /*setTimeout(function()
-  {
-    document.getElementById("intro").remove();
-  },2500)*/
 }
 var tracknumber = 1;
 function playpause()
 {
   changeicon1();
 }
+
 /* AUDIO PLAYER */
 /* GLOBAL OBJECTS*/
 var button, slider;
@@ -216,46 +206,6 @@ function repeat()
     iconrepeat.style.color = "white";
     }
 }
-/*
-var safetracknumber;
-function play()
-{
-  var musicvideo = document.getElementById("player");
-  safetracknumber = tracknumber;
-  audio = document.getElementById("audio");
-  /*audio.play();
-  var songname = document.getElementById("songname");
-  /*
-    if(tracknumber === 1)
-    {
-      /*
-      songname.textContent = "Luis Fonsi & Daddy Yankee ft. Justin Bieber - Despacito (El Bee X Chunky Dip Remix)";
-      player.loadVideoById('kZFHX21QwIw');
-
-    }
-    else if(tracknumber === 2)
-    {
-      songname.textContent = "The Chainsmokers - Don't Say ft. Emily Warren (DEVI Remix)";
-      player.loadVideoById('2mjMRLFoUWE');
-    }
-    else if(tracknumber === 3)
-    {
-      songname.textContent = "Mike Williams Ft. Brēzy - Don't Hurt (TuneSquad x Adryx - G Bootleg)";
-      player.loadVideoById('qlT0huRUrqI');
-    }
-    else if(tracknumber === 4)
-    {
-      songname.textContent = "Martin Garrix & Troye Sivan - There For You (Tom Westy Remix)";
-      player.loadVideoById('5y2pG-dtVKc');
-    }
-    else if(tracknumber === 5)
-    {
-      songname.textContent = "TESTING";
-      player.loadVideoById('B7bqAsxee4I');
-    }
-  audio.addEventListener('ended', NextSong);
-}
-*/
 
 function changeicon1()
 {
@@ -318,127 +268,26 @@ function showvid()
     logo.style.display = "none";
     clickvideo.style.opacity="1";
     clickvideo.style.zIndex = "1";
-     var playbackQuality = player.getPlaybackQuality();
+     /*var playbackQuality = player.getPlaybackQuality();
      var suggestedQuality = 'hd1080';
      if( playbackQuality !== 'hd1080')
      {
        console.log("Setting quality to " + suggestedQuality );
        player.setPlaybackQuality( suggestedQuality );
-     }
+     }*/
   }
   else
   {
-    var playbackQuality = player.getPlaybackQuality();
+    /*var playbackQuality = player.getPlaybackQuality();
     if( playbackQuality !== 'tiny') {
       console.log("Setting quality to " + suggestedQuality );
       //player.setPlaybackQuality( suggestedQuality );
       clickvideo.style.zIndex = "-99";
-    }
+    }*/
+    clickvideo.style.zIndex = "-1";
     showvidicon.style.color = "white";
     clickvideo.style.opacity = "0";
-    //player.setPlaybackQuality('small');
     logo.style.display = "block";
   }
 }
 var clicker = 0;
-function cloudrap()
-{
-  clicker++;
-  var cloud = document.getElementById("cloud");
-  if(clicker%2 == 1)
-  {
-    cloud.style.color = "#007fff";
-    playlisttrack = 2;
-    player.loadPlaylist(
-      {
-        list : 'PLT4oRPVflrCdGoo_k-qZBfx3McKFgBzpg',
-        index : playlisttrack,
-      })
-  }
-  else
-  {
-    cloud.style.color = "white";
-    player.loadPlaylist(
-      {
-        listType: 'playlist',
-        list: 'PLWaEl4Kd1431oovMu8hTTThjAKnS--QXu',
-      })
-  }
-  changeicon();
-}
-var click = 0;
-var check = false;
-var field = document.getElementById("playfield");
-var cockmover = document.getElementById("move");
-var h1 = document.createElement("h1");
-var sperm = document.getElementById("sperm")
-function easteregg()
-{
-  click++;
-  if(click %2 != 0)
-  {
-    playfield.style.zIndex ="99";
-    var div = document.createElement("div");
-    div.id = "move";
-    playfield.appendChild(div);
-    sperm = new Image();
-    sperm.src = 'pictures/easteregg/sperma.png';
-    sperm.id = "sperma";
-    div.appendChild(sperm);
-    document.getElementById("dj").style.filter = "blur(5px)";
-    img = new Image();
-    img.src = 'pictures/easteregg/penis.png';
-    div.appendChild(img);
-    img.id ="penis";
-    check = true;
-  }
-  else {
-    playfield.style.zIndex ="0";
-    playfield.removeChild(move);
-    document.getElementById("dj").style.filter = "blur(0)";
-    check = false;
-
-  }
-}
-function moveCock(event)
-{
-  if(check === true)
-  {
-    cock = document.getElementById("penis");
-    var positionX = cock.getBoundingClientRect().left;
-    mouseX = event.clientX;
-    cock.style.left = mouseX + "px";
-  }
-}
-var spacecounter = 0;
-document.onkeydown = function(event)
-{
-
-  if(event.keyCode === 32  || event.which && check === true)
-  {
-    spacecounter++;
-    cock = document.getElementById("penis");
-    sperma.style.marginLeft = "33px"
-    sperma.style.display = "block";
-    posX = cock.getBoundingClientRect().left;
-    sperma.style.left = posX + "px";
-    var height = document.body.clientHeight;
-    var i = 110;
-    var distance = height;
-    updateScreen();
-      function updateScreen()
-      {
-        if(++i < distance)
-        {
-          i+=3;
-          sperma.style.bottom = i + "px";
-          setTimeout(updateScreen, 0.1);
-        }
-        else
-        {
-          sperma.style.display = "none";
-          sperma.style.bottom = "0";
-        }
-      }
-    }
-}

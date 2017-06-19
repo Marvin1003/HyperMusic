@@ -15,61 +15,7 @@ body,html
   background-position: top;
   z-index: -99;
 }
-#eastereggs
-{
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 5px;
-  width: 5px;
-  z-index: 100;
-}
-#cock
-{
-  position:absolute;
-  height: 100vh;
-  width: 100vw;
-  color: white;
-}
-#playfield
-{
-  position: absolute;
-  height: 100vh;
-  width: 100vw;
-}
-#penis
-{
-  position: absolute;
-  height: 150px;
-  bottom: 0;
-  left: 0;
-}
-#move
-{
-  position: absolute;
-  bottom: 0;
-  height: 250px;
-}
-#sperma
-{
-  display: none;
-  position: absolute;
-  height: 80px;
-  bottom: 110px;
-}
-@keyframes turn
-{
-  0%{top: 0;
-    left: 0;
-    transform: rotate(0deg)}
-  25%{top: 60vh;
-      left: 0}
-  50%{top: 60vh;
-      left: 50vw}
-  75%{top: 0;
-    left: 50vw}
-  100%{transform:rotate(360deg); left: 0}
-}
+
 #intro
 {
   position: absolute;
@@ -194,19 +140,19 @@ header  i
   transition: .3s ease-in-out;
   cursor: pointer;
 }
-header a:nth-of-type(1):hover i
+header span:nth-of-type(1) i:hover
 {
   color: orange;
 }
-header a:nth-of-type(2):hover i
+header span:nth-of-type(2) i:hover
 {
   color: #fcc41e;
 }
-header a:nth-of-type(3):hover i
+header span:nth-of-type(4) i:hover
 {
   color: #DD4F43;
 }
-header a:nth-of-type(4):hover i
+header span:nth-of-type(5) i:hover
 {
   color: #D22222;
 }
@@ -407,7 +353,7 @@ input::-moz-slider-thumb{
 }
 
 
-#spinner {      /*MAKE THIS ANIMATION ONLY TO WINDOW.ONLOAD*/
+#spinner {      /*MAKE THIS ANIMATION ONLY TO WINDOW.ONLOAD !!!*/
   width: 75px;
   text-align: center;
   display: flex;
