@@ -430,12 +430,12 @@ input::-moz-slider-thumb{
   position: absolute;
   height: 40px;
   width: 100%;
-  background-color: #007fff;
+  background-color: #1e1e1e;
   bottom: 40px;
 }
 #playlists ul
 {
-  color: white;
+  color:  white;
   list-style-type: none;
   height: 100%;
   display: flex;
@@ -446,7 +446,7 @@ input::-moz-slider-thumb{
 {
   width: 20%;
   padding: 0 0 2px 0;
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid  white;
   font-variant: small-caps;
   font-size: 22px;
 }

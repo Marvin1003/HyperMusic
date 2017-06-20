@@ -94,13 +94,14 @@ function playlistpicker()
   {
     playlisticon.style.color = "#007fff";
     song.style.animation = "goDown2 1s forwards";
-    fadeInText(1)
+    document.getElementById("audiocontrol").style.borderTop ="1px solid #1e1e1e";
+    fadeInText(1);
   }
   else
   {
+    document.getElementById("audiocontrol").style.borderTop ="1px solid lightgray";
     playlisticon.style.color = "white";
     song.style.animation = "goUp2 1s forwards";
-
   }
 }
 function fadeInText(number)
