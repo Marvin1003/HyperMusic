@@ -352,6 +352,21 @@ input::-moz-slider-thumb{
   to{top: 60px}
 }
 
+@keyframes goUp2
+{
+  from{bottom: 0px;
+       z-index: -1;}
+  to{bottom: 40px;
+     z-index: 1;}
+}
+@keyframes goDown2
+{
+  from{bottom: 40px;
+       z-index: 1;}
+  to{bottom: 0px
+     z-index: -1}
+}
+
 
 #spinner {      /*MAKE THIS ANIMATION ONLY TO WINDOW.ONLOAD !!!*/
   width: 75px;
@@ -405,4 +420,23 @@ input::-moz-slider-thumb{
   border-radius: 100%;
   width: 22px;
   background-color: #007fff;
+}
+#playlists
+{
+  position: absolute;
+  height: 39px;
+  width: 100%;
+  background-color: #1e1e1e;
+  bottom: 0;
+  z-index: -1;
+  border-top: 1px solid white;
+}
+#playlists ul
+{
+  color: white;
+  list-style-type: none;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }

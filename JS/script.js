@@ -60,6 +60,11 @@ function onPlayerStateChange(event) {
   var iconrepeat = document.getElementById("repeat");
   var showvidicon = document.getElementById("showvidicon");
   var icon = document.getElementById("playpausebutton");
+  if(event.data === 0)
+  {
+    sheet.removeRule(keyframe);
+    indicator.style.animation = "none";
+  }
   if(event.data === 1)
   {
     icon.textContent ="pause";
@@ -81,8 +86,23 @@ function setShuffle(shuffle)
 {
     player.setShuffle(shuffle);
 }
+function playlistpicker()
+{
+  var playlist = document.getElementById("playlists");
+  var playlisticon = document.getElementById("playlist");
+  if(playlisticon.style.color != "#007fff")
+  {
+    playlisticon.style.color = "#007fff";
+    playlist.style.animation = "goUp2 1s forwards";
+  }
+  else
+  {
+    playlisticon.style.color = "white";
+    playlist.style.animation = "goDown2 1s forwards";
 
-/* INITIALIZE VOLUME */
+  }
+}
+
 var audio, showvidicon, iconshuffle, iconrepeat, main, section, nav, iconnav, name;
 window.onload = function()
 {
@@ -154,13 +174,6 @@ function setvolume(volume)
   player.setVolume(volume);
 }
 
-
-function next()
-{
-  player.nextVideo();
-}
-
-
 function random()
 {
   var random;
@@ -171,10 +184,18 @@ function random()
   tracknumber = random;
 }
 
+function next()
+{
+  player.nextVideo();
+  sheet.removeRule(keyframe);
+  indicator.style.animation = "none";
+}
 
 function previous()
 {
   player.previousVideo();
+  sheet.removeRule(keyframe);
+  indicator.style.animation = "none";
 }
 
 var shuffleon = false;
@@ -194,7 +215,6 @@ function shuffle()
     setShuffle(shuffleon);
   }
 }
-
 
 function repeat()
 {
@@ -221,6 +241,10 @@ function changeicon()
   {
     icon.textContent = "play_arrow";
     player.pauseVideo();
+    calc();
+    indicator.style.left = calculate + "px";
+    sheet.removeRule(keyframe);
+
   }
 }
 
@@ -285,8 +309,8 @@ function showvid()
     logo.style.display = "block";
   }
 }
-var currentTime, indicator, distance, distanceX, distanceOutside, positionX, barW, algo, duration;
-
+var currentTime, animationduration, calculate, nkeyframe, sheet, indicator, distance, distanceX, distanceOutside, positionX, barW, algo, duration;
+var boolean = false;
 function startListener()
 {
   indicator = document.getElementById("progressIndicator");
@@ -297,6 +321,8 @@ function slideStart(event)
 {
   player.pauseVideo();
   indicator = document.getElementById("progressIndicator");
+  sheet.removeRule(keyframe);
+  indicator.style.animation = "none";
   document.addEventListener('mousemove', moveIndicator);
 }
 function moveIndicator(event)
@@ -307,25 +333,28 @@ function moveIndicator(event)
 }
 function slideStop(event)
 {
-  player.playVideo();
   document.removeEventListener('mousemove', moveIndicator);
-}
-function progressIndicator()
-{
-  duration = player.getDuration();
-  currentTime = player.getCurrentTime();
-  barW = document.getElementById("progressBar").clientWidth;
-  algo = (barW / duration) * currentTime;
-  indicator = document.getElementById("progressIndicator");
-  if(algo < barW-10)
-    indicator.style.left = algo + "px";
-  duration = player.getDuration();
-  setTimeout(function()
-  {
-    progressIndicator();
-  },500);
+  player.playVideo();
 }
 
+function progressIndicator()
+{
+  calc();
+  sheet = document.styleSheets[2];
+  keyframe ="@keyframes progress {from{left:" + calculate + "px} to{left:" + barW + "px}}";
+  sheet.insertRule(keyframe, 0);
+  indicator.style.animation = "progress " + animationduration + "s linear";
+
+}
+function calc()
+{
+  indicator = document.getElementById("progressIndicator");
+  currentTime = player.getCurrentTime();
+  duration = player.getDuration();
+  barW = document.getElementById("progressBar").clientWidth;
+  calculate = (barW/duration) * currentTime;
+  animationduration = duration - currentTime;
+}
 function calculateDistance(distance)
 {
   distanceOutside = document.getElementById("progressBar").offsetLeft;
@@ -341,7 +370,10 @@ function calculateDistance(distance)
 
 function seekTo(distance)
 {
+  indicator = document.getElementById("progressIndicator");
+  sheet.removeRule(keyframe);
+  indicator.style.animation = "none";
   calculateDistance(distance);
-  time = (duration / barW) * distanceX;
   player.seekTo(time);
+
 }

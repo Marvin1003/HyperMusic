@@ -5,6 +5,7 @@
     <title>HyperMusic</title>
     <link href="css/normalize.css" type="text/css" rel="stylesheet">
     <link href="css/responsive.css" type="text/css" rel="stylesheet">
+    <link href="css/javascript-animation.css" type="text/css" rel="stylesheet">
     <link href="css/style.css" type="text/css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -55,17 +56,25 @@
           <div id="audiocontrol" class="flex-center">
               <div class="flex-center">
                 <i class="material-icons" onclick="showvid()" id="showvidicon">video_library</i>
-                <i class="material-icons" id="shuffle" onclick="shuffle()">shuffle</i>
+                <i class="material-icons" onclick="playlistpicker()" id="playlist">library_music</i>
+                <i class="material-icons" onclick="shuffle()" id="shuffle">shuffle</i>
                 <i class="material-icons" onclick="previous()">skip_previous</i>
                 <i class="material-icons" onclick="changeicon()" id="playpausebutton">play_arrow</i>
                 <i class="material-icons" onclick="next()">skip_next</i>
-                <i class="material-icons" id="repeat" onclick="repeat()">repeat_one</i>
+                <i class="material-icons" onclick="repeat()" id="repeat">repeat_one</i>
               </div>
               <div id="volume" class="flex-center">
                 <i class="material-icons" id="volumebutton" onclick="showvolumeslider(1)">volume_up</i>
                 <input type="range" min="0" max="25" step="1" value="2.5" oninput="setvolume(this.value)" id="volumeslider"></input>
               </div>
         </div>
+        <div id="playlists">
+          <ul>
+            <li>uploads</li>
+            <li>house</li>
+            <li>electro</li>
+            <li>trap</li>
+          </ul>
         </div>
       </footer>
     </section>
