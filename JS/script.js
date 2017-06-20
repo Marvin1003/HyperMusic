@@ -119,14 +119,12 @@ function fadeInText(number)
     playlisttext = document.createTextNode("bootlegs");
   playlistH2.appendChild(playlisttext);
   document.getElementById("section").appendChild(playlistH2);
-  main.style.filter = "blur(10px)";
-  main.style.transform ="scale(1.05)";
+  main.style.opacity = "0.1";
   playlistH2.id = "fadeInText";
   playlistH2.style.animation ="fadeInText 2s forwards";
   setTimeout(function()
   {
-    main.style.filter = "blur(0)";
-    main.style.transform ="scale(1)";
+    main.style.opacity = "1";
     playlistH2.parentNode.removeChild(playlistH2);
   }, 1800)
 }

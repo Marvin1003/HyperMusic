@@ -469,8 +469,7 @@ input::-moz-slider-thumb{
 {
   position: absolute;
   align-self: center;
-  margin: auto;
-  color: white;
+  color: black;
   font-variant: small-caps;
   z-index: 99;
   font-size: 10vw;
