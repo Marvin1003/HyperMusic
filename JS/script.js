@@ -62,7 +62,7 @@ function onPlayerStateChange(event) {
   var icon = document.getElementById("playpausebutton");
   if(event.data === 0)
   {
-    sheet.removeRule(keyframe);
+    removeAnimation();
     indicator.style.animation = "none";
   }
   if(event.data === 1)
@@ -88,21 +88,92 @@ function setShuffle(shuffle)
 }
 function playlistpicker()
 {
-  var playlist = document.getElementById("playlists");
+  var song = document.getElementById("song");
   var playlisticon = document.getElementById("playlist");
-  if(playlisticon.style.color != "#007fff")
+  if(playlisticon.style.color === "" || playlisticon.style.color === "white")
   {
     playlisticon.style.color = "#007fff";
-    playlist.style.animation = "goUp2 1s forwards";
+    song.style.animation = "goDown2 1s forwards";
+    fadeInText(1)
   }
   else
   {
     playlisticon.style.color = "white";
-    playlist.style.animation = "goDown2 1s forwards";
+    song.style.animation = "goUp2 1s forwards";
 
   }
 }
+function fadeInText(number)
+{
+  var playlisttext;
+  var playlistH2 = document.createElement("h2");
+  if(number === 1)
+    playlisttext = document.createTextNode("playlists");
+  else if(number === 2)
+    playlisttext = document.createTextNode("uploads");
+  else if(number === 3)
+    playlisttext = document.createTextNode("house");
+  else if(number === 4)
+    playlisttext = document.createTextNode("trap");
+  else if(number === 5)
+    playlisttext = document.createTextNode("bootlegs");
+  playlistH2.appendChild(playlisttext);
+  document.getElementById("section").appendChild(playlistH2);
+  main.style.filter = "blur(10px)";
+  main.style.transform ="scale(1.05)";
+  playlistH2.id = "fadeInText";
+  playlistH2.style.animation ="fadeInText 2s forwards";
+  setTimeout(function()
+  {
+    main.style.filter = "blur(0)";
+    main.style.transform ="scale(1)";
+    playlistH2.parentNode.removeChild(playlistH2);
+  }, 1800)
+}
 
+function pickplaylist(number)
+{
+  if(number === 1)
+  {
+    playlisttrack = 1;
+    player.loadPlaylist(
+        {
+          list : 'PLWaEl4Kd1431oovMu8hTTThjAKnS--QXu',
+          index : 0,
+        })
+      removeAnimation();
+  }
+  else if(number === 2)
+  {
+    playlisttrack = 1;
+    player.loadPlaylist(
+        {
+          list : 'PLWaEl4Kd14315eJwG1efjJmlBe8A1gvBc',
+          index : 0,
+        })
+      removeAnimation();
+  }
+  else if(number === 3)
+  {
+    playlisttrack = 1;
+    player.loadPlaylist(
+        {
+          list : 'PLWaEl4Kd14333074dxwYX7omccfrAAHJG',
+          index : 0,
+        })
+      removeAnimation();
+  }
+  else if(number === 4)
+  {
+    playlisttrack = 1;
+    player.loadPlaylist(
+        {
+          list : 'PLWaEl4Kd1431Qxj-sQx4YUTjwj-EDBQEW',
+          index : 0,
+        })
+      removeAnimation();
+  }
+}
 var audio, showvidicon, iconshuffle, iconrepeat, main, section, nav, iconnav, name;
 window.onload = function()
 {
@@ -186,16 +257,16 @@ function random()
 
 function next()
 {
-  player.nextVideo();
-  sheet.removeRule(keyframe);
+  removeAnimation();
   indicator.style.animation = "none";
+  player.nextVideo();
 }
 
 function previous()
 {
-  player.previousVideo();
-  sheet.removeRule(keyframe);
+  removeAnimation();
   indicator.style.animation = "none";
+  player.previousVideo();
 }
 
 var shuffleon = false;
@@ -243,12 +314,10 @@ function changeicon()
     player.pauseVideo();
     calc();
     indicator.style.left = calculate + "px";
-    sheet.removeRule(keyframe);
+    removeAnimation();
 
   }
 }
-
-
 
 function NextSong()
 {
@@ -287,29 +356,18 @@ function showvid()
     logo.style.display = "none";
     clickvideo.style.opacity="1";
     clickvideo.style.zIndex = "1";
-     /*var playbackQuality = player.getPlaybackQuality();
-     var suggestedQuality = 'hd1080';
-     if( playbackQuality !== 'hd1080')
-     {
-       console.log("Setting quality to " + suggestedQuality );
-       player.setPlaybackQuality( suggestedQuality );
-     }*/
   }
   else
   {
-    /*var playbackQuality = player.getPlaybackQuality();
-    if( playbackQuality !== 'tiny') {
-      console.log("Setting quality to " + suggestedQuality );
-      //player.setPlaybackQuality( suggestedQuality );
-      clickvideo.style.zIndex = "-99";
-    }*/
     clickvideo.style.zIndex = "-1";
     showvidicon.style.color = "white";
     clickvideo.style.opacity = "0";
     logo.style.display = "block";
   }
 }
-var currentTime, animationduration, calculate, nkeyframe, sheet, indicator, distance, distanceX, distanceOutside, positionX, barW, algo, duration;
+var currentTime, animationduration, calculate, nkeyframe, sheet, indicator,
+ distance, distanceX, distanceOutside, positionX, barW, algo, duration,
+keyframe, webkeyframe;
 var boolean = false;
 function startListener()
 {
@@ -321,7 +379,7 @@ function slideStart(event)
 {
   player.pauseVideo();
   indicator = document.getElementById("progressIndicator");
-  sheet.removeRule(keyframe);
+  removeAnimation();
   indicator.style.animation = "none";
   document.addEventListener('mousemove', moveIndicator);
 }
@@ -342,7 +400,9 @@ function progressIndicator()
   calc();
   sheet = document.styleSheets[2];
   keyframe ="@keyframes progress {from{left:" + calculate + "px} to{left:" + barW + "px}}";
+  webkeyframe = "@-webkit-keyframes progress {from{left:" + calculate + "px} to{left:" + barW + "px}}";
   sheet.insertRule(keyframe, 0);
+  sheet.insertRule(webkeyframe, 0);
   indicator.style.animation = "progress " + animationduration + "s linear";
 
 }
@@ -371,9 +431,15 @@ function calculateDistance(distance)
 function seekTo(distance)
 {
   indicator = document.getElementById("progressIndicator");
-  sheet.removeRule(keyframe);
   indicator.style.animation = "none";
+  removeAnimation();
   calculateDistance(distance);
   player.seekTo(time);
 
+}
+
+function removeAnimation()
+{
+  sheet.deleteRule(keyframe);
+  sheet.deleteRule(webkeyframe);
 }

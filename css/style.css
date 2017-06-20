@@ -40,6 +40,7 @@ body,html
   background-image: url("../pictures/wallpaper/dj.jpg");
   background-position: top;
   background-repeat: no-repeat;
+  transition: all .5s ease-in-out;
 }
 #cover
 {
@@ -93,6 +94,7 @@ section
   height: 100vh;
   width: 100vw;
   display: flex;
+  justify-content: center;
   flex-direction: column;
   overflow: hidden;
 }
@@ -116,7 +118,7 @@ section
   user-select: none;
   position: absolute;
   border-top: 1px solid rgba(255,255,255,0.5);
-  top: -1;
+  top: -1px;
   z-index: 3;
   background-color: #1e1e1e;
 }
@@ -176,6 +178,7 @@ nav
 {
   background-color: #191919;
   position: absolute;
+  top: 0;
   z-index: 2;
 }
 nav span{
@@ -205,11 +208,17 @@ nav li, nav a
   from{opacity: 0}
   to{ opacity: 1}
 }
+footer
+{
+  z-index: 10;
+}
 #song
 {
+  position: relative;
   height: 40px;
   width: 100%;
   background-color: #1e1e1e;
+  z-index: 99;
 }
 #songname
 {
@@ -218,6 +227,7 @@ nav li, nav a
   text-align: center;
   color: white;
   white-space: nowrap;
+
 }
 #song>div{
   display: flex;
@@ -241,12 +251,10 @@ nav li, nav a
   flex-grow: 1;
   border-top: 1px solid gray;
 }
-footer
-{
-  z-index: 10;
-}
 #audiocontrol
 {
+  position: relative;
+  z-index: 99;
   user-select: none;
   border-top: 1px solid lightgray;
   height: 39px;
@@ -281,7 +289,6 @@ footer
 }
 #volumebutton
 {
-  z-index: 1;
   transition: .5s ease-in-out;
 }
 #volumeslider
@@ -354,18 +361,15 @@ input::-moz-slider-thumb{
 
 @keyframes goUp2
 {
-  from{bottom: 0px;
-       z-index: -1;}
-  to{bottom: 40px;
-     z-index: 1;}
+  from{bottom: -40px}
+  to{bottom: 0px}
 }
 @keyframes goDown2
 {
-  from{bottom: 40px;
-       z-index: 1;}
-  to{bottom: 0px
-     z-index: -1}
+  from{bottom: 0px}
+  to{bottom: -40px}
 }
+
 
 
 #spinner {      /*MAKE THIS ANIMATION ONLY TO WINDOW.ONLOAD !!!*/
@@ -380,7 +384,6 @@ input::-moz-slider-thumb{
   background-color: #fff;
   border-radius: 100%;
   animation: bounce 1.2s infinite ease-in-out;
-
 }
 #spinner .bounce3 {
   animation-delay: 0.32s;
@@ -390,7 +393,8 @@ input::-moz-slider-thumb{
   animation-delay: 0.16s;
 }
 
-@keyframes bounce{
+@keyframes bounce
+{
   0%{
     transform: scale(0);
     }
@@ -424,12 +428,10 @@ input::-moz-slider-thumb{
 #playlists
 {
   position: absolute;
-  height: 39px;
+  height: 40px;
   width: 100%;
-  background-color: #1e1e1e;
-  bottom: 0;
-  z-index: -1;
-  border-top: 1px solid white;
+  background-color: #007fff;
+  bottom: 40px;
 }
 #playlists ul
 {
@@ -439,4 +441,45 @@ input::-moz-slider-thumb{
   display: flex;
   justify-content: space-around;
   align-items: center;
+}
+#playlists li
+{
+  width: 20%;
+  padding: 0 0 2px 0;
+  border-bottom: 1px solid white;
+  font-variant: small-caps;
+  font-size: 22px;
+}
+#playlists span
+{
+  position: relative;
+  cursor: pointer;
+}
+#playlists span:hover
+{
+  animation: backforward .5s ease-in-out infinite;
+}
+@keyframes backforward
+{
+  0%{left: 0}
+  50%{left: 4px}
+  100%{left: 0}
+}
+#fadeInText
+{
+  position: absolute;
+  align-self: center;
+  margin: auto;
+  color: white;
+  font-variant: small-caps;
+  z-index: 99;
+  font-size: 10vw;
+}
+@keyframes fadeInText
+{
+  0%{ transform: translate(100vw)}
+  30%{ transform: translate(-50vw, -50vw);transform: scale(1)}
+  50%{transform: scale(1.2)}
+  70%{transform: scale(1)}
+  100%{transform: translate(-100vw)}
 }
