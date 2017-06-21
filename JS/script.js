@@ -229,11 +229,12 @@ var counter = 0;
 var canceldown = false;
 var cancelup = false;
 var idx = 0;
-var loopLimit = 60;
+var loopLimit;
 var animationobject;
 
 function shownav()
 {
+  loopLimit = 60;
   animationobject = document.getElementById("icons");
   counter++;
   var expand = document.getElementById("expand");
@@ -267,7 +268,7 @@ function goDown()
       }
       goDown();
     }
-  }, 12.5);
+  }, 5);
   if(currentposition > loopLimit)
     cancelup = false;
 }
@@ -288,7 +289,7 @@ function goDown()
         }
         goUp(value);
       }
-    }, 12.5);
+    }, 5);
     if(currentposition < 0)
       canceldown = false;
     if(value === 1 && currentposition < 0)
