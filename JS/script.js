@@ -53,6 +53,7 @@ function onPlayerReady(event)
       index: playlisttrack,
     })
 }
+
 var check = false;
 function onPlayerStateChange(event) {
   document.getElementById("songname").textContent = player.getVideoData().title;
@@ -88,46 +89,58 @@ function setShuffle(shuffle)
 }
 function playlistpicker()
 {
-  var song = document.getElementById("song");
+  loopLimit = 40;
+  animationobject = document.getElementById("song");
   var playlisticon = document.getElementById("playlist");
   if(playlisticon.style.color === "" || playlisticon.style.color === "white")
   {
     playlisticon.style.color = "#007fff";
-    song.style.animation = "goDown2 1s forwards";
+    cancelup = true;
+    goDown();
     document.getElementById("audiocontrol").style.borderTop ="1px solid #1e1e1e";
     fadeInText(1);
   }
   else
   {
-    document.getElementById("audiocontrol").style.borderTop ="1px solid lightgray";
     playlisticon.style.color = "white";
-    song.style.animation = "goUp2 1s forwards";
+    canceldown = true;
+    goUp(1);
   }
 }
+var count = 0;
 function fadeInText(number)
 {
   var playlisttext;
+  playlisttext = document.createTextNode("playlists");
   var playlistH2 = document.createElement("h2");
-  if(number === 1)
-    playlisttext = document.createTextNode("playlists");
-  else if(number === 2)
-    playlisttext = document.createTextNode("uploads");
-  else if(number === 3)
-    playlisttext = document.createTextNode("house");
-  else if(number === 4)
-    playlisttext = document.createTextNode("trap");
-  else if(number === 5)
-    playlisttext = document.createTextNode("bootlegs");
-  playlistH2.appendChild(playlisttext);
-  document.getElementById("section").appendChild(playlistH2);
-  main.style.opacity = "0.1";
-  playlistH2.id = "fadeInText";
-  playlistH2.style.animation ="fadeInText 2s forwards";
-  setTimeout(function()
+  count++;
+  if(count === 1)
+    animate();
+  playlistH2.addEventListener("animationend", animate);
+  playlistH2.addEventListener("webkitAnimationEnd", animate);
+  function animate()
   {
-    main.style.opacity = "1";
-    playlistH2.parentNode.removeChild(playlistH2);
-  }, 1800)
+    if(number === 1)
+      playlisttext = document.createTextNode("playlists");
+    else if(number === 2)
+      playlisttext = document.createTextNode("uploads");
+    else if(number === 3)
+      playlisttext = document.createTextNode("house");
+    else if(number === 4)
+      playlisttext = document.createTextNode("trap");
+    else if(number === 5)
+      playlisttext = document.createTextNode("bootlegs");
+    playlistH2.appendChild(playlisttext);
+    document.getElementById("section").appendChild(playlistH2);
+    playlistH2.id = "fadeInText";
+    playlistH2.style.animation ="fadeInText 2s forwards";
+    main.style.opacity = "0.1";
+    setTimeout(function()
+    {
+      main.style.opacity = "1";
+      playlistH2.parentNode.removeChild(playlistH2);
+    }, 1800)
+  }
 }
 
 function pickplaylist(number)
@@ -211,22 +224,79 @@ window.onclick = function(mouse)
   clickcount++;
 }
 
+var currentposition = 0;
 var counter = 0;
+var canceldown = false;
+var cancelup = false;
+var idx = 0;
+var loopLimit = 60;
+var animationobject;
+
 function shownav()
 {
+  animationobject = document.getElementById("icons");
   counter++;
   var expand = document.getElementById("expand");
   if(counter%2 !== 0)
   {
-    iconnav.style.animation = "goDown 1s forwards";
+    cancelup = true;
+    goDown();
     expand.style.transform= "rotate(180deg)";
   }
   else
   {
-    iconnav.style.animation = "goUp 1s forwards";
+    canceldown = true;
+    goUp();
     expand.style.transform= "rotate(360deg)";
   }
 }
+
+/** GO DOWN / GO UP ANIMATION **/
+function goDown()
+{
+  setTimeout(function ()
+  {
+    if (currentposition <= loopLimit)
+    {
+      currentposition++;
+      animationobject.style.top = currentposition + "px";
+      if(canceldown)
+      {
+        cancelup = false;
+        return null;
+      }
+      goDown();
+    }
+  }, 12.5);
+  if(currentposition > loopLimit)
+    cancelup = false;
+}
+/*****************/
+
+  function goUp (value)
+  {
+    setTimeout(function ()
+    {
+      if (currentposition >= 0)
+      {
+        currentposition--;
+        animationobject.style.top = currentposition + "px";
+        if(cancelup)
+        {
+          canceldown = false;
+          return null;
+        }
+        goUp(value);
+      }
+    }, 12.5);
+    if(currentposition < 0)
+      canceldown = false;
+    if(value === 1 && currentposition < 0)
+      document.getElementById("audiocontrol").style.borderTop ="1px solid lightgray";
+
+}
+
+
 
 function showvolumeslider(value)
 {

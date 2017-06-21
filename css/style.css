@@ -57,23 +57,7 @@ body,html
   align-items: center;
   z-index: 99;
 }
-/*
-#name
-{
-  position: relative;
-  bottom: -100vh;
-  padding: 10px 30px 0 30px;
-  color: white;
-  animation: name 1s .5s;
-  letter-spacing: 2px;
-  white-space: nowrap;
-  border-top: 1px solid lightgray;
-}
-@keyframes name
-{
-  from{bottom: -100vh}
-  to{bottom: 0}
-}*/
+
 #logo
 {
   animation: logo 1.5s;
@@ -118,9 +102,9 @@ section
   user-select: none;
   position: absolute;
   border-top: 1px solid rgba(255,255,255,0.5);
-  top: -1px;
-  z-index: 3;
   background-color: #1e1e1e;
+  top: 0px;
+  z-index: 99;
 }
 #expand
 {
@@ -178,8 +162,7 @@ nav
 {
   background-color: #191919;
   position: absolute;
-  top: 0;
-  z-index: 2;
+  top: 0px;
 }
 nav span{
 
@@ -254,11 +237,11 @@ footer
 #audiocontrol
 {
   position: relative;
-  z-index: 99;
   user-select: none;
   border-top: 1px solid lightgray;
   height: 39px;
   width: 100%;
+  z-index: 99;
   background-color: #1e1e1e;
 }
 #audiocontrol>div:first-of-type
@@ -346,28 +329,6 @@ input::-moz-slider-thumb{
   pointer-events: none;
   z-index: -1;
   margin-bottom: 60px;
-}
-
-@keyframes goUp
-{
-  from{top: 60px}
-  to{top: -1px}
-}
-@keyframes goDown
-{
-  from{top: -1px}
-  to{top: 60px}
-}
-
-@keyframes goUp2
-{
-  from{bottom: -40px}
-  to{bottom: 0px}
-}
-@keyframes goDown2
-{
-  from{bottom: 0px}
-  to{bottom: -40px}
 }
 
 
@@ -464,6 +425,13 @@ input::-moz-slider-thumb{
   0%{left: 0}
   50%{left: 4px}
   100%{left: 0}
+}
+
+@keyframes opacity
+{
+  0%{opacity: 0.1}
+  99%{opacity: 0.1}
+  100%{opacity: 1}
 }
 #fadeInText
 {
