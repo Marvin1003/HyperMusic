@@ -107,38 +107,39 @@ function playlistpicker()
     goUp(1);
   }
 }
-var count = 0;
+var test = false;
+var runningcheck = false;
+var playlistH2 = document.createElement("h2");
 function fadeInText(number)
 {
+
+
   var playlisttext;
-  playlisttext = document.createTextNode("playlists");
-  var playlistH2 = document.createElement("h2");
-  count++;
-  if(count === 1)
+  if(number === 1)
+    playlistH2.textContent = "playlists";
+  else if(number === 2)
+    playlistH2.textContent = "uploads";
+  else if(number === 3)
+    playlistH2.textContent = "house";
+  else if(number === 4)
+    playlistH2.textContent = "trap";
+  else if(number === 5)
+    playlistH2.textContent = "bootlegs";
+
+  if(runningcheck === false)
     animate();
-  playlistH2.addEventListener("animationend", animate);
-  playlistH2.addEventListener("webkitAnimationEnd", animate);
+
   function animate()
   {
-    if(number === 1)
-      playlisttext = document.createTextNode("playlists");
-    else if(number === 2)
-      playlisttext = document.createTextNode("uploads");
-    else if(number === 3)
-      playlisttext = document.createTextNode("house");
-    else if(number === 4)
-      playlisttext = document.createTextNode("trap");
-    else if(number === 5)
-      playlisttext = document.createTextNode("bootlegs");
-    playlistH2.appendChild(playlisttext);
     document.getElementById("section").appendChild(playlistH2);
     playlistH2.id = "fadeInText";
     playlistH2.style.animation ="fadeInText 2s forwards";
     main.style.opacity = "0.1";
+    runningcheck = true;
     setTimeout(function()
     {
       main.style.opacity = "1";
-      playlistH2.parentNode.removeChild(playlistH2);
+      runningcheck = false;
     }, 1800)
   }
 }
@@ -294,7 +295,6 @@ function goDown()
       canceldown = false;
     if(value === 1 && currentposition < 0)
       document.getElementById("audiocontrol").style.borderTop ="1px solid lightgray";
-
 }
 
 
@@ -465,6 +465,8 @@ function slideStop(event)
   player.playVideo();
 }
 
+var rulechecker;
+rulechecker = false;
 function progressIndicator()
 {
   calc();
@@ -473,6 +475,7 @@ function progressIndicator()
   webkeyframe = "@-webkit-keyframes progress {from{left:" + calculate + "px} to{left:" + barW + "px}}";
   sheet.insertRule(keyframe, 0);
   sheet.insertRule(webkeyframe, 0);
+  rulechecker = true;
   indicator.style.animation = "progress " + animationduration + "s linear";
 
 }
@@ -510,6 +513,10 @@ function seekTo(distance)
 
 function removeAnimation()
 {
-  sheet.deleteRule(keyframe);
-  sheet.deleteRule(webkeyframe);
+  if(rulechecker === true)
+  {
+    sheet.deleteRule(keyframe);
+    sheet.deleteRule(webkeyframe);
+    rulechecker = false;
+  }
 }
