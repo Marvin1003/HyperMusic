@@ -163,6 +163,7 @@ nav
   background-color: #191919;
   position: absolute;
   top: 0px;
+  z-index: 50;
 }
 nav span{
 
@@ -394,29 +395,54 @@ input::-moz-slider-thumb{
   background-color: #1e1e1e;
   bottom: 40px;
 }
-#playlists ul
+#swiper
 {
+  position: relative;
+  display: flex;
   color:  white;
   list-style-type: none;
   height: 100%;
+}
+.wrapper
+{
+  height: 100%;
+  min-width: 90vw;
+  position: relative;
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
+#arrowright
+{
+  transition: .5s ease-in-out;
+}
+
 #playlists li
 {
-  width: 20%;
+  min-width: 20%;
   padding: 0 0 2px 0;
   border-bottom: 1px solid  white;
   font-variant: small-caps;
   font-size: 22px;
+}
+#playlists i
+{
+  font-size: 30px;
+}
+#playlists>ul>div:nth-of-type(2)
+{
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 10%;
 }
 #playlists span
 {
   position: relative;
   cursor: pointer;
 }
-#playlists span:hover
+#playlists li span:hover
 {
   animation: backforward .5s ease-in-out infinite;
 }

@@ -131,6 +131,14 @@ function fadeInText(number)
     playlistH2.textContent = "trap";
   else if(number === 5)
     playlistH2.textContent = "bootlegs";
+  else if(number === 6)
+    playlistH2.textContent = "future house";
+  else if(number === 7)
+    playlistH2.textContent = "melbourne bounce";
+  else if(number === 8)
+    playlistH2.textContent = "hyperchill";
+  else if(number === 9)
+    playlistH2.textContent = "mixtapes";
 
   if(runningcheck === false)
     animate();
@@ -152,40 +160,69 @@ function fadeInText(number)
 
 function pickplaylist(number)
 {
+  playlisttrack = 0;
   if(number === 1)
   {
-    playlisttrack = 1;
     player.loadPlaylist(
         {
           list : 'PLWaEl4Kd1431oovMu8hTTThjAKnS--QXu',
-          index : 0,
+          index : playlisttrack,
         })
   }
   else if(number === 2)
   {
-    playlisttrack = 1;
     player.loadPlaylist(
         {
           list : 'PLWaEl4Kd14315eJwG1efjJmlBe8A1gvBc',
-          index : 0,
+          index : playlisttrack,
         })
   }
   else if(number === 3)
   {
-    playlisttrack = 1;
     player.loadPlaylist(
         {
           list : 'PLWaEl4Kd14333074dxwYX7omccfrAAHJG',
-          index : 0,
+          index : playlisttrack,
         })
   }
   else if(number === 4)
   {
-    playlisttrack = 1;
     player.loadPlaylist(
         {
           list : 'PLWaEl4Kd1431Qxj-sQx4YUTjwj-EDBQEW',
-          index : 0,
+          index : playlisttrack,
+        })
+  }
+  else if(number === 5)
+  {
+    player.loadPlaylist(
+        {
+          list : 'PLWaEl4Kd1432NYXf3l-qnV_Blbs_sXEVc',
+          index : playlisttrack,
+        })
+  }
+  else if(number === 6)
+  {
+    player.loadPlaylist(
+        {
+          list : 'PLWaEl4Kd1432-iOhl2qSNOyR-b-p5tNXV',
+          index : playlisttrack,
+        })
+  }
+  else if(number === 7)
+  {
+    player.loadPlaylist(
+        {
+          list : 'PLWaEl4Kd1433BRrulM0Zq0FCLIacdirfD',
+          index : playlisttrack,
+        })
+  }
+  else if(number === 8)
+  {
+    player.loadPlaylist(
+        {
+          list : 'PLWaEl4Kd1430HCxzvV6l9ogrrQoVg4v4m',
+          index : playlisttrack,
         })
   }
 }
@@ -260,7 +297,7 @@ function goDown()
 {
   setTimeout(function ()
   {
-    if (currentposition <= loopLimit)
+    if (currentposition < loopLimit)
     {
       currentposition++;
       animationobject.style.top = currentposition + "px";
@@ -272,7 +309,7 @@ function goDown()
       goDown();
     }
   }, 5);
-  if(currentposition > loopLimit)
+  if(currentposition >= loopLimit)
     cancelup = false;
 }
 /*****************/
@@ -281,7 +318,7 @@ function goDown()
   {
     setTimeout(function ()
     {
-      if (currentposition >= 0)
+      if (currentposition > 0)
       {
         currentposition--;
         animationobject.style.top = currentposition + "px";
@@ -293,7 +330,7 @@ function goDown()
         goUp(value);
       }
     }, 5);
-    if(currentposition < 0)
+    if(currentposition <= 0)
       canceldown = false;
     if(value === 1 && currentposition < 0)
       document.getElementById("audiocontrol").style.borderTop ="1px solid lightgray";
@@ -384,7 +421,6 @@ function changeicon()
   {
     icon.textContent = "play_arrow";
     player.pauseVideo();
-    calculateDistance();
     indicator.style.left = calculate + "px";
 
   }
@@ -486,18 +522,6 @@ function slideStop(event)
   player.playVideo();
 }
 
-
-/*function progressIndicator()
-{
-  calc();
-  sheet = document.styleSheets[2];
-  keyframe ="@keyframes progress {from{left:" + calculate + "px} to{left:" + barW + "px}}";
-  webkeyframe = "@-webkit-keyframes progress {from{left:" + calculate + "px} to{left:" + barW + "px}}";
-  sheet.insertRule(keyframe, 0);
-  sheet.insertRule(webkeyframe, 0);
-  rulechecker = true;
-  indicator.style.animation = "progress " + animationduration + "s linear";
-}*/
 function progressIndicator()
 {
   var algo = (document.getElementById("progressBar").clientWidth/player.getDuration()) *  player.getCurrentTime();
@@ -525,4 +549,71 @@ function seekTo(distance)
     calculateDistance(distance);
     player.seekTo(time);
   }
+}
+
+function swipe()
+{
+  loopLimit = 90;
+  var arrow = document.getElementById("arrowright");
+  animationobject = document.getElementById("swiper");
+  counter++;
+  if(counter%2 !== 0)
+  {
+    cancelright = true;
+    goLeft();
+    arrow.style.transform= "rotate(180deg)";
+  }
+  else
+  {
+    cancelleft = true;
+    goRight();
+    arrow.style.transform= "rotate(360deg)";
+  }
+}
+
+/*** MOVE LEFT / MOVE RIGHT - ANIMATION ***/
+
+var cancelleft = false;
+var cancelright = false;
+var currentposition1 = 0;
+
+function goLeft()
+{
+  setTimeout(function ()
+  {
+    if (currentposition1 < loopLimit)
+    {
+      currentposition1++;
+      animationobject.style.right= currentposition1 + "vw";
+      if(cancelleft)
+      {
+        cancelright = false;
+        return null;
+      }
+      goLeft();
+    }
+  }, 5);
+  if(currentposition1 >= loopLimit)
+    cancelright = false;
+}
+/*****************/
+
+  function goRight (value)
+  {
+    setTimeout(function ()
+    {
+      if (currentposition1 > 0)
+      {
+        currentposition1--;
+        animationobject.style.right = currentposition1 + "vw";
+        if(cancelright)
+        {
+          cancelleft = false;
+          return null;
+        }
+        goRight(value);
+      }
+    }, 5);
+    if(currentposition1 <= 0)
+      cancelleft = false;
 }
