@@ -43,7 +43,6 @@ function onPlayerError()
 var event;
 function onPlayerReady(event)
 {
-  event.target.setPlaybackQuality('highres');
   event.target.setVolume(2.5);
   event.target.setLoop(true);
   event.target.loadPlaylist(
@@ -53,18 +52,18 @@ function onPlayerReady(event)
       index: playlisttrack,
     })
 }
-
+var quality = "tiny"
 var check = false;
 function onPlayerStateChange(event) {
   document.getElementById("songname").textContent = player.getVideoData().title;
-  event.target.setPlaybackQuality('highres');
+  event.target.setPlaybackQuality(quality);
   var iconrepeat = document.getElementById("repeat");
   var showvidicon = document.getElementById("showvidicon");
   var icon = document.getElementById("playpausebutton");
   if(event.data === 0)
   {
+    indicator.style.left ="0px";
     removeAnimation();
-    indicator.style.animation = "none";
   }
   if(event.data === 1)
   {
@@ -83,6 +82,9 @@ function onPlayerStateChange(event) {
     check = true;
   }
 }
+
+
+
 function setShuffle(shuffle)
 {
     player.setShuffle(shuffle);
@@ -327,15 +329,15 @@ function random()
 
 function next()
 {
+  indicator.style.left = "0px";
   removeAnimation();
-  indicator.style.animation = "none";
   player.nextVideo();
 }
 
 function previous()
 {
+  indicator.style.left = "0px";
   removeAnimation();
-  indicator.style.animation = "none";
   player.previousVideo();
 }
 
@@ -387,6 +389,25 @@ function changeicon()
     removeAnimation();
 
   }
+}
+
+function hdquality()
+{
+  var time = player.getCurrentTime();
+  var hdicon = document.getElementById("hd");
+  if(hdicon.style.color === "" || hdicon.style.color === "white")
+  {
+    hdicon.style.color = "#007fff";
+    quality = "highres";
+  }
+  else
+  {
+    hdicon.style.color = "white";
+    quality = "tiny";
+  }
+  player.playVideoAt(playlisttrack);
+  removeAnimation();
+  player.seekTo(time);
 }
 
 function NextSong()
@@ -443,6 +464,7 @@ function startListener()
 {
   indicator = document.getElementById("progressIndicator");
   indicator.addEventListener('mousedown', slideStart);
+  document.addEventListener('mouseup', slideStop);
 }
 
 function slideStart(event)
@@ -503,18 +525,22 @@ function calculateDistance(distance)
 
 function seekTo(distance)
 {
-  indicator = document.getElementById("progressIndicator");
-  indicator.style.animation = "none";
-  removeAnimation();
-  calculateDistance(distance);
-  player.seekTo(time);
-
+  if(distance.target != document.getElementById("progressIndicator"))
+  {
+    console.log("ZIEGEN");
+    indicator = document.getElementById("progressIndicator");
+    indicator.style.animation = "none";
+    removeAnimation();
+    calculateDistance(distance);
+    player.seekTo(time);
+  }
 }
 
 function removeAnimation()
 {
   if(rulechecker === true)
   {
+    indicator.style.animation ="none";
     sheet.deleteRule(keyframe);
     sheet.deleteRule(webkeyframe);
     rulechecker = false;
