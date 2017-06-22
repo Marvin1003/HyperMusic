@@ -102,7 +102,7 @@ function playlistpicker()
   {
     playlisticon.style.color = "#007fff";
     cancelup = true;
-    goDown();
+    goDownPlaylist();
     document.getElementById("audiocontrol").style.borderTop ="1px solid #1e1e1e";
     fadeInText(1);
   }
@@ -110,7 +110,7 @@ function playlistpicker()
   {
     playlisticon.style.color = "white";
     canceldown = true;
-    goUp(1);
+    goUpPlaylist();
   }
 }
 var test = false;
@@ -292,49 +292,6 @@ function shownav()
   }
 }
 
-/** GO DOWN / GO UP ANIMATION **/
-function goDown()
-{
-  setTimeout(function ()
-  {
-    if (currentposition < loopLimit)
-    {
-      currentposition++;
-      animationobject.style.top = currentposition + "px";
-      if(canceldown)
-      {
-        cancelup = false;
-        return null;
-      }
-      goDown();
-    }
-  }, 5);
-  if(currentposition >= loopLimit)
-    cancelup = false;
-}
-/*****************/
-
-  function goUp (value)
-  {
-    setTimeout(function ()
-    {
-      if (currentposition > 0)
-      {
-        currentposition--;
-        animationobject.style.top = currentposition + "px";
-        if(cancelup)
-        {
-          canceldown = false;
-          return null;
-        }
-        goUp(value);
-      }
-    }, 5);
-    if(currentposition <= 0)
-      canceldown = false;
-    if(value === 1 && currentposition < 0)
-      document.getElementById("audiocontrol").style.borderTop ="1px solid lightgray";
-}
 
 
 
@@ -571,6 +528,10 @@ function swipe()
   }
 }
 
+/***************************************************/
+/**************++++++ANIMATION**********************/
+/***************************************************/
+
 /*** MOVE LEFT / MOVE RIGHT - ANIMATION ***/
 
 var cancelleft = false;
@@ -598,7 +559,7 @@ function goLeft()
 }
 /*****************/
 
-  function goRight (value)
+  function goRight ()
   {
     setTimeout(function ()
     {
@@ -611,9 +572,94 @@ function goLeft()
           cancelleft = false;
           return null;
         }
-        goRight(value);
+        goRight();
       }
     }, 5);
     if(currentposition1 <= 0)
       cancelleft = false;
+}
+
+/** GO DOWN / GO UP ANIMATION **/
+function goDown()
+{
+  setTimeout(function ()
+  {
+    if (currentposition < loopLimit)
+    {
+      currentposition++;
+      animationobject.style.top = currentposition + "px";
+      if(canceldown)
+      {
+        cancelup = false;
+        return null;
+      }
+      goDown();
+    }
+  }, 5);
+  if(currentposition >= loopLimit)
+    cancelup = false;
+}
+/*****************/
+
+  function goUp ()
+  {
+    setTimeout(function ()
+    {
+      if (currentposition > 0)
+      {
+        currentposition--;
+        animationobject.style.top = currentposition + "px";
+        if(cancelup)
+        {
+          canceldown = false;
+          return null;
+        }
+        goUp();
+      }
+    }, 5);
+    if(currentposition <= 0)
+      canceldown = false;
+}
+
+var currentposition3 = 0;
+
+function goDownPlaylist()
+{
+  setTimeout(function ()
+  {
+    if (currentposition3 < loopLimit)
+    {
+      currentposition3++;
+      animationobject.style.top = currentposition3 + "px";
+      if(canceldown)
+      {
+        cancelup = false;
+        return null;
+      }
+      goDownPlaylist();
+    }
+  }, 5);
+  if(currentposition3 >= loopLimit)
+    cancelup = false;
+}
+/*****************/
+
+  function goUpPlaylist ()
+  {
+    setTimeout(function ()
+    {
+      if (currentposition3 > 0)
+      {
+        currentposition3--;
+        animationobject.style.top = currentposition3 + "px";
+        if(cancelup)
+        {
+          canceldown = false;
+          return null;
+        }
+        goUpPlaylist();
+      }
+    }, 5);
+    if(currentposition3 <= 0)
+      canceldown = false;
 }
