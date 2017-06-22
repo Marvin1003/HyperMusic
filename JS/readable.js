@@ -40,9 +40,14 @@ function onPlayerError()
   playlisttrack++;
   player.nextVideo();
 }
+
 var event;
 function onPlayerReady(event)
 {
+  setInterval(function()
+  {
+    progressIndicator();
+  },500);
   event.target.setVolume(2.5);
   event.target.setLoop(true);
   event.target.loadPlaylist(
@@ -63,12 +68,11 @@ function onPlayerStateChange(event) {
   if(event.data === 0)
   {
     indicator.style.left ="0px";
-    removeAnimation();
   }
   if(event.data === 1)
   {
     icon.textContent ="pause";
-    progressIndicator();
+    //progressIndicator();
     startListener();
   }
   if(event.data === 1 && !check)
@@ -156,7 +160,6 @@ function pickplaylist(number)
           list : 'PLWaEl4Kd1431oovMu8hTTThjAKnS--QXu',
           index : 0,
         })
-      removeAnimation();
   }
   else if(number === 2)
   {
@@ -166,7 +169,6 @@ function pickplaylist(number)
           list : 'PLWaEl4Kd14315eJwG1efjJmlBe8A1gvBc',
           index : 0,
         })
-      removeAnimation();
   }
   else if(number === 3)
   {
@@ -176,7 +178,6 @@ function pickplaylist(number)
           list : 'PLWaEl4Kd14333074dxwYX7omccfrAAHJG',
           index : 0,
         })
-      removeAnimation();
   }
   else if(number === 4)
   {
@@ -186,7 +187,6 @@ function pickplaylist(number)
           list : 'PLWaEl4Kd1431Qxj-sQx4YUTjwj-EDBQEW',
           index : 0,
         })
-      removeAnimation();
   }
 }
 var audio, showvidicon, iconshuffle, iconrepeat, main, section, nav, iconnav, name;
@@ -331,7 +331,6 @@ function next()
 {
   indicator.style.left = "0px";
   playlisttrack++;
-  removeAnimation();
   player.nextVideo();
 }
 
@@ -339,7 +338,6 @@ function previous()
 {
   indicator.style.left = "0px";
   playlisttrack--;
-  removeAnimation();
   player.previousVideo();
 }
 
@@ -386,9 +384,8 @@ function changeicon()
   {
     icon.textContent = "play_arrow";
     player.pauseVideo();
-    calc();
+    calculateDistance();
     indicator.style.left = calculate + "px";
-    removeAnimation();
 
   }
 }
@@ -407,9 +404,7 @@ function hdquality()
     hdicon.style.color = "white";
     quality = "tiny";
   }
-  console.log(playlisttrack);
   player.playVideoAt(playlisttrack);
-  removeAnimation();
   player.seekTo(time);
 }
 
@@ -459,10 +454,12 @@ function showvid()
     logo.style.display = "block";
   }
 }
-var currentTime, animationduration, calculate, nkeyframe, sheet, indicator,
- distance, distanceX, distanceOutside, positionX, barW, algo, duration,
+var currentTime, animationduration, calculate, nkeyframe, sheet,
+ distance, distanceInBar, distanceOutside, positionX, algo, duration,
 keyframe, webkeyframe;
 var boolean = false;
+var indicator = document.getElementById("progressIndicator");
+
 function startListener()
 {
   indicator = document.getElementById("progressIndicator");
@@ -474,7 +471,6 @@ function slideStart(event)
 {
   player.pauseVideo();
   indicator = document.getElementById("progressIndicator");
-  removeAnimation();
   indicator.style.animation = "none";
   document.addEventListener('mousemove', moveIndicator);
 }
@@ -490,9 +486,8 @@ function slideStop(event)
   player.playVideo();
 }
 
-var rulechecker;
-rulechecker = false;
-function progressIndicator()
+
+/*function progressIndicator()
 {
   calc();
   sheet = document.styleSheets[2];
@@ -502,28 +497,23 @@ function progressIndicator()
   sheet.insertRule(webkeyframe, 0);
   rulechecker = true;
   indicator.style.animation = "progress " + animationduration + "s linear";
-
-}
-function calc()
+}*/
+function progressIndicator()
 {
+  var algo = (document.getElementById("progressBar").clientWidth/player.getDuration()) *  player.getCurrentTime();
   indicator = document.getElementById("progressIndicator");
-  currentTime = player.getCurrentTime();
-  duration = player.getDuration();
-  barW = document.getElementById("progressBar").clientWidth;
-  calculate = (barW/duration) * currentTime;
-  animationduration = duration - currentTime;
+  indicator.style.left =algo +"px";
 }
 function calculateDistance(distance)
 {
-  distanceOutside = document.getElementById("progressBar").offsetLeft;
-  barW = document.getElementById("progressBar").clientWidth;
-  positionX = distance.clientX;
-  duration = player.getDuration();
+  var bar = document.getElementById("progressBar");
   indicator = document.getElementById("progressIndicator");
-  distanceX = positionX - distanceOutside - 11;
-  time = (duration / barW) * distanceX;
-  if(distanceX < barW-10 && distanceX > 0)
-    indicator.style.left = distanceX + "px";
+  positionX = distance.clientX;
+  distanceOutside = bar.offsetLeft;
+  distanceInBar = positionX - distanceOutside-11;
+  if(distanceInBar < document.getElementById("progressBar").clientWidth && distanceInBar > 0)
+    indicator.style.left = distanceInBar + "px";
+  time = (player.getDuration()/document.getElementById("progressBar").clientWidth) * distanceInBar;
 }
 
 function seekTo(distance)
@@ -532,19 +522,7 @@ function seekTo(distance)
   {
     indicator = document.getElementById("progressIndicator");
     indicator.style.animation = "none";
-    removeAnimation();
     calculateDistance(distance);
     player.seekTo(time);
-  }
-}
-
-function removeAnimation()
-{
-  if(rulechecker === true)
-  {
-    indicator.style.animation ="none";
-    sheet.deleteRule(keyframe);
-    sheet.deleteRule(webkeyframe);
-    rulechecker = false;
   }
 }
