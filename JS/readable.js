@@ -330,6 +330,7 @@ function random()
 function next()
 {
   indicator.style.left = "0px";
+  playlisttrack++;
   removeAnimation();
   player.nextVideo();
 }
@@ -337,6 +338,7 @@ function next()
 function previous()
 {
   indicator.style.left = "0px";
+  playlisttrack--;
   removeAnimation();
   player.previousVideo();
 }
@@ -405,6 +407,7 @@ function hdquality()
     hdicon.style.color = "white";
     quality = "tiny";
   }
+  console.log(playlisttrack);
   player.playVideoAt(playlisttrack);
   removeAnimation();
   player.seekTo(time);
@@ -527,7 +530,6 @@ function seekTo(distance)
 {
   if(distance.target != document.getElementById("progressIndicator"))
   {
-    console.log("ZIEGEN");
     indicator = document.getElementById("progressIndicator");
     indicator.style.animation = "none";
     removeAnimation();
