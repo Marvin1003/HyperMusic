@@ -68,6 +68,7 @@ function onPlayerStateChange(event) {
   if(event.data === 0)
   {
     indicator.style.left ="0px";
+    playlisttrack++;
   }
   if(event.data === 1)
   {
@@ -436,14 +437,14 @@ function showvid()
   {
     showvidicon.style.color = "#007fff";
     logo.style.display = "none";
-    clickvideo.style.opacity="1";
+    clickvideo.style.opacity ="1";
     clickvideo.style.zIndex = "1";
   }
   else
   {
-    clickvideo.style.zIndex = "-1";
+    clickvideo.style.zIndex = "-99";
+    clickvideo.style.opacity ="0";
     showvidicon.style.color = "white";
-    clickvideo.style.opacity = "0";
     logo.style.display = "block";
   }
 }

@@ -322,6 +322,7 @@ input::-moz-slider-thumb{
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: opacity .5s ease-in-out;
 }
 #player
 {
