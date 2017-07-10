@@ -68,12 +68,14 @@ function onPlayerStateChange(event) {
   if(event.data === 0)
   {
     indicator.style.left ="0px";
-    playlisttrack++;
+    if(shufflecheck)
+      player.previousVideo();
+    else
+      playlisttrack++;
   }
   if(event.data === 1)
   {
     icon.textContent ="pause";
-    //progressIndicator();
     startListener();
   }
   if(event.data === 1 && !check)
@@ -82,12 +84,14 @@ function onPlayerStateChange(event) {
     setTimeout(function()
     {
       document.getElementById("intro").remove();
+      document.getElementById("logo1").style.zIndex = "1";
+      document.getElementById("section").style.position ="static";
+      document.body.classList.remove("stop-scrolling");
     }, 1000);
     document.getElementById("spinner").style.animation = "fadein .5s reverse ease-in-out forwards";
     check = true;
   }
 }
-
 
 
 function setShuffle(shuffle)
@@ -148,13 +152,17 @@ function fadeInText(number)
   {
     document.getElementById("section").appendChild(playlistH2);
     playlistH2.id = "fadeInText";
+    playlistH2.style.position = "fixed";
     playlistH2.style.animation ="fadeInText 2s forwards";
-    main.style.opacity = "0.1";
+    main.style.opacity = ".1";
+    document.getElementById("me").style.backgroundColor = "rgba(0,0,0,0)";
     runningcheck = true;
     setTimeout(function()
     {
       main.style.opacity = "1";
       runningcheck = false;
+      document.getElementById("me").style.backgroundColor = "rgba(0,0,0,0.5)";
+
     }, 1800)
   }
 }
@@ -243,6 +251,7 @@ window.onload = function()
   showvidicon.style.color = "white";
   iconshuffle.style.color = "white";
   iconrepeat.style.color = "white";
+
 }
 var tracknumber = 1;
 
@@ -353,18 +362,20 @@ function shuffle()
     setShuffle(shuffleon);
   }
 }
-
+var shufflecheck = false;
 function repeat()
 {
   var iconrepeat = document.getElementById("repeat");
   if(iconrepeat.style.color === "white")
   {
+    shufflecheck = true;
     iconrepeat.style.color = "#007fff";
   }
   else
   {
+    shufflecheck = false;
     iconrepeat.style.color = "white";
-    }
+  }
 }
 
 function changeicon()
@@ -663,4 +674,66 @@ function goDownPlaylist()
     }, 5);
     if(currentposition3 <= 0)
       canceldown = false;
+}
+
+/* SMOOTH SCROLLING *//*
+function scrollTo(element, to, duration)
+{
+  if(duration <= 0)
+    return;
+  var distance = to - element.scrollTop;
+  var time = difference / duration * 10;
+
+  setTimeout(function()
+  {
+       element.scrollTop = element.scrollTop + perTick;
+       if (element.scrollTop === to) return;
+       scrollTo(element, to, duration - 10);
+   }, 10);
+}
+
+var link = document.getElementById("aboutlink");
+link.onclick = function()
+{
+  scrollTo(document.body, me.offsetTop, 100);
+}
+
+elmnt = document.getElementById("footer");
+scrollTo(document.body, elmnt.offsetTop, 600);
+
+function scrollTo(element, to, duration) {
+    if (duration <= 0) return;
+    var difference = to - element.scrollTop;
+    var perTick = difference / duration * 10;
+
+    setTimeout(function() {
+        element.scrollTop = element.scrollTop + perTick;
+        if (element.scrollTop === to) return;
+        scrollTo(element, to, duration - 10);
+    }, 10);
+}
+*/
+
+function runScroll()
+{
+  scrollTo(document.body, document.getElementById("me").offsetTop, 800);
+}
+setTimeout(function()
+{
+  var scrollme = document.querySelector("#test");
+  scrollme.addEventListener("click",runScroll)
+},1000);
+
+function scrollTo(element, to, duration) {
+  if (duration <= 0)
+    return;
+  var difference = to - element.scrollTop;
+  var time = difference / duration * 10;
+
+  setTimeout(function() {
+    element.scrollTop += time;
+    if (element.scrollTop === to)
+      return;
+    scrollTo(element, to, duration - 10);
+  }, 10);
 }

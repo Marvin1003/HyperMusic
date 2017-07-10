@@ -8,21 +8,18 @@ body,html
 {
   font-family: 'Raleway';
 }
-.fullscreen-wallpaper
+.stop-scrolling
 {
-  height: 100%;
-  min-width: 100vw;
-  background-position: top;
-  z-index: -99;
+  height: 100vh;
+  overflow: hidden;
 }
-
 #intro
 {
   position: absolute;
   top: 0;
-  left: 0;
-  height: 100vh;
+  bottom: 0;
   width: 100vw;
+  height:100vh;
   background-color: black;
   z-index: 99;
 }
@@ -31,15 +28,26 @@ body,html
   from{left: 0}
   to{left: 100vw}
 }
-
+#wallpaper
+{
+  position: fixed;
+  top: 60px;
+  background-image: url(../pictures/wallpaper/dj3.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top;
+  height: 100vh;
+  width: 100vw;
+  z-index: -1;
+}
+#me
+{
+  box-shadow: 0px -3px 5px black;
+  background-color: rgba(0,0,0,0.5);
+}
 #dj
 {
   position: relative;
-  top: 60px;
-  background-size: cover;
-  background-image: url("../pictures/wallpaper/dj3.jpg");
-  background-position: top;
-  background-repeat: no-repeat;
   transition: all .5s ease-in-out;
 }
 #cover
@@ -56,14 +64,8 @@ body,html
   flex-direction: column;
   align-items: center;
   z-index: 99;
+
 }
-
-#logo
-{
-  animation: logo 1.5s;
-}
-
-
 main
 {
   flex-grow: 1;
@@ -100,7 +102,6 @@ section
 #icons
 {
   user-select: none;
-  position: absolute;
   border-top: 1px solid rgba(255,255,255,0.5);
   background-color: #1e1e1e;
   top: 0px;
@@ -151,6 +152,7 @@ a
 }
 .navi
 {
+  position: fixed;
   height: 60px;
   width: 100%;
   white-space: nowrap;
@@ -194,6 +196,9 @@ nav li, nav a
 }
 footer
 {
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
   z-index: 10;
 }
 #song
@@ -335,36 +340,62 @@ input::-moz-slider-thumb{
 
 
 #spinner {      /*MAKE THIS ANIMATION ONLY TO WINDOW.ONLOAD !!!*/
-  width: 75px;
+  width: 90px;
+  height: 50px;
   text-align: center;
   display: flex;
   justify-content: space-around;
 }
 #spinner > div {
-  width: 18px;
-  height: 18px;
-  background-color: #fff;
-  border-radius: 100%;
-  animation: bounce 1.2s infinite ease-in-out;
-}
-#spinner .bounce3 {
-  animation-delay: 0.32s;
+  background-color: white;
+  height: 100%;
+  width: 7px;
+  border-radius: 20%;
+  animation: eqload 1.2s infinite ease-in-out;
 }
 
-#spinner .bounce2 {
-  animation-delay: 0.16s;
+
+#spinner .rect2 {
+  -webkit-animation-delay: -1.1s;
+  animation-delay: -1.1s;
 }
 
-@keyframes bounce
+#spinner .rect3 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+
+#spinner .rect4 {
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s;
+}
+
+#spinner .rect5 {
+  -webkit-animation-delay: -0.8s;
+  animation-delay: -0.8s;
+}
+#spinner .rect6 {
+  -webkit-animation-delay: -0.8s;
+  animation-delay: -1.0s;
+}
+#spinner .rect7 {
+  -webkit-animation-delay: -0.8s;
+  animation-delay: -1.1s;
+}
+
+@keyframes eqload
 {
   0%{
-    transform: scale(0);
+    transform: scaleY(0.45);
     }
- 50%{
-    transform: scale(1.0);
+ 20%{
+    transform: scaleY(1);
+    }
+ 40%{
+    transform: scaleY(0.45);
     }
 100%{
-    transform: scale(0);
+    transform: scaleY(0.45);
     }
 }
 #progressBar
@@ -476,4 +507,36 @@ input::-moz-slider-thumb{
   50%{transform: scale(1.2)}
   70%{transform: scale(1)}
   100%{transform: translate(-100vw)}
+}
+article
+{
+  position: relative;
+  height: 100%;
+  margin-top: 60px;
+  margin-bottom: 80px;
+  display: flex;
+  overflow: hidden;
+}
+#about
+{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  top: 75px;
+  left: 100px;
+  width: 45%;
+}
+#about h2
+{
+  font-size: 30px;
+  color: white;
+  margin-bottom: 50px;
+}
+#about p
+{
+  color: white;
+  letter-spacing: 1px;
+  line-height: 38px;
+  font-size: 22px;
+
 }

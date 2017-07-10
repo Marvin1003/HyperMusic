@@ -15,8 +15,8 @@
     <link rel="icon" href="pictures/logo/logodark.png" type="image/gif" sizes="16x16">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   </head>
-  <body>
-    <section id="section" >
+  <body class="stop-scrolling">
+    <section id="section">
       <header class="navi" id="icons">
         <span><a href="https://soundcloud.com/hypermusicofficial" target="_blank"><i class="fa fa-soundcloud fa-2x" aria-hidden="true"></i></a></span>
         <span><a href="https://www.instagram.com/hypermusicofficial/" target="_blank"><i class="fa fa-instagram fa-2x" aria-hidden="true"></i></a></span>
@@ -25,25 +25,30 @@
         <span><a href="https://www.youtube.com/hypermusicofficial" target="_blank"><i class="fa fa-youtube-play fa-2x" aria-hidden="true"></i></a></span>
       </header>
       <nav class="navi" id="nav">
-        <span><a href="#">uploads</a></span>
+        <span><a id="test">about me</a></span>
         <span><a href="#">submission</a></span>
         <span><img src="pictures/logo/hyperation.png" alt="HyperNation"></span>
         <span><a href="#">booking</a></span>
         <span><a href="#">contact</a></span>
       </nav>
-      <div id="intro"></div>
       <main id="dj">
+        <div id="intro"></div>
+        <div id="wallpaper"></div>
         <div id="clickvideo" onclick="changeicon()"><div id="player"></div></div>
-        <div class="logo">
+        <div class="logo" id="logo1">
           <img id="logo" src="pictures/logo/logodark.png" alt="Logodark" draggable="false">
           <div id="spinner">
-            <div class="bounce1"></div>
-            <div class="bounce2"></div>
-            <div class="bounce3"></div>
+            <div class="rect1"></div>
+            <div class="rect2"></div>
+            <div class="rect3"></div>
+            <div class="rect4"></div>
+            <div class="rect5"></div>
+            <div class="rect6"></div>
+            <div class="rect7"></div>
           </div>
         </div>
       </main>
-      <footer>
+      <footer id="footer">
         <div id="audioplayer">
           <div id="progressBar" onclick="seekTo(event)"><div id="progressIndicator"></div></div>
           <div id="song" class="flex-center">
@@ -89,6 +94,20 @@
           </ul>
         </div>
       </footer>
+    </section>
+    <section id="me">
+      <main>
+        <article>
+          <div id="about">
+            <h2>
+              ABOUT ME
+            </h2>
+            <p>
+              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
+            </p>
+          </div>
+        </article>
+      </main>
     </section>
   </body>
 </html>
