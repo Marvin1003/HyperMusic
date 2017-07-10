@@ -80,14 +80,14 @@ function onPlayerStateChange(event) {
   }
   if(event.data === 1 && !check)
   {
-    document.getElementById("intro").style.animation = "getOut 1s ease-in-out";
+    document.getElementById("intro").style.animation = "fadeout 1.5s ease-in-out";
     setTimeout(function()
     {
       document.getElementById("intro").remove();
       document.getElementById("logo1").style.zIndex = "1";
       document.getElementById("section").style.position ="static";
       document.body.classList.remove("stop-scrolling");
-    }, 1000);
+    }, 1500);
     document.getElementById("spinner").style.animation = "fadein .5s reverse ease-in-out forwards";
     check = true;
   }
@@ -390,8 +390,6 @@ function changeicon()
   {
     icon.textContent = "play_arrow";
     player.pauseVideo();
-    indicator.style.left = calculate + "px";
-
   }
 }
 
@@ -443,7 +441,6 @@ function showvid()
   var logo = document.getElementById("logo");
   var clickvideo = document.getElementById("clickvideo");
 
-  logo.style.animation = "none";
   if(showvidicon.style.color === "white")
   {
     showvidicon.style.color = "#007fff";
@@ -469,7 +466,6 @@ function startListener()
 {
   indicator = document.getElementById("progressIndicator");
   indicator.addEventListener('mousedown', slideStart);
-  document.addEventListener('mouseup', slideStop);
 }
 
 function slideStart(event)
@@ -488,6 +484,7 @@ function moveIndicator(event)
 function slideStop(event)
 {
   document.removeEventListener('mousemove', moveIndicator);
+  document.removeEventListener('mouseup', slideStop);
   player.playVideo();
 }
 
@@ -676,43 +673,7 @@ function goDownPlaylist()
       canceldown = false;
 }
 
-/* SMOOTH SCROLLING *//*
-function scrollTo(element, to, duration)
-{
-  if(duration <= 0)
-    return;
-  var distance = to - element.scrollTop;
-  var time = difference / duration * 10;
-
-  setTimeout(function()
-  {
-       element.scrollTop = element.scrollTop + perTick;
-       if (element.scrollTop === to) return;
-       scrollTo(element, to, duration - 10);
-   }, 10);
-}
-
-var link = document.getElementById("aboutlink");
-link.onclick = function()
-{
-  scrollTo(document.body, me.offsetTop, 100);
-}
-
-elmnt = document.getElementById("footer");
-scrollTo(document.body, elmnt.offsetTop, 600);
-
-function scrollTo(element, to, duration) {
-    if (duration <= 0) return;
-    var difference = to - element.scrollTop;
-    var perTick = difference / duration * 10;
-
-    setTimeout(function() {
-        element.scrollTop = element.scrollTop + perTick;
-        if (element.scrollTop === to) return;
-        scrollTo(element, to, duration - 10);
-    }, 10);
-}
-*/
+/* SMOOTH SCROLLING */
 
 function runScroll()
 {
