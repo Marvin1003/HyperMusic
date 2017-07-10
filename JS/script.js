@@ -296,6 +296,7 @@ function shownav()
   }
   else
   {
+    document.getElementById("nav").style.visibility = "hidden";
     canceldown = true;
     goUp();
     expand.style.transform= "rotate(360deg)";
@@ -606,7 +607,11 @@ function goDown()
     }
   }, 5);
   if(currentposition >= loopLimit)
+  {
+    document.getElementById("nav").style.visibility = "visible";
+    console.log("Test");
     cancelup = false;
+  }
 }
 /*****************/
 

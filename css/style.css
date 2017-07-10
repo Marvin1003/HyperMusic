@@ -31,7 +31,6 @@ body,html
 #wallpaper
 {
   position: fixed;
-  top: 60px;
   background-image: url(../pictures/wallpaper/dj3.jpg);
   background-repeat: no-repeat;
   background-size: cover;
@@ -102,9 +101,10 @@ section
 }
 #icons
 {
+  position: absolute;
+  overflow: auto;
   user-select: none;
   border-top: 1px solid rgba(255,255,255,0.5);
-  background-color: #1e1e1e;
   top: 0px;
   z-index: 99;
 }
@@ -163,7 +163,7 @@ a
 
 nav
 {
-  background-color: #191919;
+  visibility: hidden;
   position: absolute;
   top: 0px;
   z-index: 50;
@@ -207,7 +207,6 @@ footer
   position: relative;
   height: 40px;
   width: 100%;
-  background-color: #1e1e1e;
   z-index: 99;
 }
 #songname
@@ -248,7 +247,6 @@ footer
   height: 40px;
   width: 100%;
   z-index: 99;
-  background-color: #1e1e1e;
 }
 #audiocontrol>div:first-of-type
 {
@@ -402,7 +400,7 @@ input::-moz-slider-thumb{
 #progressBar
 {
   position: relative;
-  background-color: rgba(255,255,255,0.8);
+  background-color:  darkgray;
   margin: 10px auto;
   height: 8px;
   width: 75vw;
@@ -421,10 +419,10 @@ input::-moz-slider-thumb{
 }
 #playlists
 {
+  display: none;
   position: absolute;
   height: 40px;
   width: 100%;
-  background-color: #1e1e1e;
   bottom: 40px;
 }
 #swiper
