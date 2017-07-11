@@ -15,7 +15,7 @@ body,html
 }
 #intro
 {
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   width: 100vw;
@@ -101,8 +101,6 @@ section
 }
 #icons
 {
-  position: absolute;
-  overflow: auto;
   user-select: none;
   border-top: 1px solid rgba(255,255,255,0.5);
   top: 0px;
@@ -153,19 +151,22 @@ a
 }
 .navi
 {
-  position: fixed;
+  position: relative;
   height: 60px;
   width: 100%;
   white-space: nowrap;
   display: flex;
   align-items: center;
 }
-
+#navigation
+{
+  top: -60px;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+}
 nav
 {
-  visibility: hidden;
-  position: absolute;
-  top: 0px;
   z-index: 50;
 }
 nav span{
@@ -319,7 +320,7 @@ input::-moz-slider-thumb{
 {
   z-index: -99;
   opacity: 0;
-  position: absolute;
+  position: fixed;
   top: 0;
   height: 100%;
   width: 100%;

@@ -235,9 +235,17 @@ function pickplaylist(number)
         })
   }
 }
+
+window.onbeforeunload = function()
+{
+  window.scrollTo(0, 0);
+};
+
 var audio, showvidicon, iconshuffle, iconrepeat, main, section, nav, iconnav, name;
 window.onload = function()
 {
+
+
   name = document.getElementById("name");
   showvidicon = document.getElementById("showvidicon");
   iconshuffle = document.getElementById("shuffle");
@@ -274,18 +282,19 @@ window.onclick = function(mouse)
   clickcount++;
 }
 
-var currentposition = 0;
+var currentposition = -60;
 var counter = 0;
 var canceldown = false;
 var cancelup = false;
 var idx = 0;
 var loopLimit;
 var animationobject;
+var endFor = 0;
 
 function shownav()
 {
-  loopLimit = 60;
-  animationobject = document.getElementById("icons");
+  loopLimit = 0;
+  animationobject = document.getElementById("navigation");
   counter++;
   var expand = document.getElementById("expand");
   if(counter%2 !== 0)
@@ -293,10 +302,11 @@ function shownav()
     cancelup = true;
     goDown();
     expand.style.transform= "rotate(180deg)";
+
   }
   else
   {
-    document.getElementById("nav").style.visibility = "hidden";
+    endFor = -60;
     canceldown = true;
     goUp();
     expand.style.transform= "rotate(360deg)";
@@ -609,7 +619,6 @@ function goDown()
   if(currentposition >= loopLimit)
   {
     document.getElementById("nav").style.visibility = "visible";
-    console.log("Test");
     cancelup = false;
   }
 }
@@ -619,7 +628,7 @@ function goDown()
   {
     setTimeout(function ()
     {
-      if (currentposition > 0)
+      if (currentposition > endFor)
       {
         currentposition--;
         animationobject.style.top = currentposition + "px";
@@ -631,7 +640,7 @@ function goDown()
         goUp();
       }
     }, 5);
-    if(currentposition <= 0)
+    if(currentposition <= endFor)
       canceldown = false;
 }
 
