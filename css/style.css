@@ -102,8 +102,7 @@ section
 #icons
 {
   user-select: none;
-  border-top: 1px solid rgba(255,255,255,0.5);
-  top: 0px;
+  top: -1px;
   z-index: 99;
 }
 #expand
@@ -163,16 +162,21 @@ a
   top: -60px;
   position: fixed;
   width: 100%;
-  z-index: 1;
+  z-index: 20;
 }
 nav
 {
   z-index: 50;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.6),
+  rgba(0,0,0,0));
 }
 nav span{
 
   width: 20%;
   text-align: center;
+}
+nav a{
+  text-shadow: 1px 1px 5px black;
 }
 /*nav span:nth-of-type(2)
 {
@@ -187,8 +191,8 @@ nav img
 }
 nav li, nav a
 {
-  color: white;
   font-size: 20px;
+  color: white;
 }
 
 @keyframes fadein
