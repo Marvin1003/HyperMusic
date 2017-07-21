@@ -511,15 +511,14 @@ function progressIndicator()
 {
   var algo = (document.getElementById("progressBar").clientWidth/player.getDuration()) *  player.getCurrentTime();
   indicator = document.getElementById("progressIndicator");
+  var test = document.getElementById("progressBar");
   indicator.style.left =algo +"px";
   var progress = player.getVideoLoadedFraction();
   var topercent = progress * 75;
+  var borderradius = progress * 100;
   var progressBarColor = document.getElementById("progressBarColor");
   if(topercent < 100)
-  {
     progressBarColor.style.width = topercent + "vw";
-    progressBarColor.style.background = "lightgray";
-  }
 }
 function calculateDistance(distance)
 {

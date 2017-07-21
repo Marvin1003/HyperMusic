@@ -397,11 +397,11 @@ input::-moz-slider-thumb{
 }
 #progressBarColor
 {
-  left: 12.5vw;
   z-index: 1;
   position: absolute;
   height: 8px;
   border-radius: 100%;
+background-color: lightgray;
 }
 #progressBar
 {
@@ -411,13 +411,16 @@ input::-moz-slider-thumb{
   height: 8px;
   width: 75vw;
   border-radius: 100%;
+  overflow: hidden;
 }
+
 #progressIndicator
 {
   cursor: pointer;
-  position: relative;
-  z-index: 1;
-  bottom: 24px;
+  position: absolute;
+  margin-left: 12.5vw;
+  z-index: 2;
+  bottom: 83px;
   height: 22px;
   border-radius: 100%;
   width: 22px;
