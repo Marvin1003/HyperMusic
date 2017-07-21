@@ -395,21 +395,29 @@ input::-moz-slider-thumb{
     transform: scaleY(0.45);
     }
 }
+#progressBarColor
+{
+  left: 12.5vw;
+  z-index: 1;
+  position: absolute;
+  height: 8px;
+  border-radius: 100%;
+}
 #progressBar
 {
   position: relative;
-  background-color:  darkgray;
+  background-color: gray;
   margin: 10px auto;
   height: 8px;
   width: 75vw;
   border-radius: 100%;
-  display: flex;
-  align-items: center;
 }
 #progressIndicator
 {
   cursor: pointer;
   position: relative;
+  z-index: 1;
+  bottom: 24px;
   height: 22px;
   border-radius: 100%;
   width: 22px;
