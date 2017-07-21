@@ -53,13 +53,34 @@
       <footer id="footer">
         <div id="audioplayer">
           <div id="progressBar" onclick="seekTo(event)"><div id="progressIndicator"></div></div>
-          <div id="song" class="flex-center">
-            <div>
-              <div></div>
-              <h3 id="songname">#HyperMusic</h3>
-              <div></div>
+
+          <div id="playlists">
+            <div id="song" class="flex-center">
+              <div>
+                <div></div>
+                <h3 id="songname">#HyperMusic</h3>
+                <div></div>
+              </div>
             </div>
+            <ul id="swiper">
+              <div id="wrapper" class="wrapper">
+                <li><span onclick="pickplaylist(1); fadeInText(2)">uploads</span></li>
+                <li><span onclick="pickplaylist(2); fadeInText(3)">house</span></li>
+                <li><span onclick="pickplaylist(3); fadeInText(4)">trap</span></li>
+                <li><span onclick="pickplaylist(4); fadeInText(5)">bootlegs</span></li>
+              </div>
+              <div>
+                <span><i class="material-icons" onclick="swipe()" id="arrowright">chevron_right</i></span>
+              </div>
+              <div id="wrapper1" class="wrapper">
+                <li><span onclick="pickplaylist(5); fadeInText(6)">future house</span></li>
+                <li><span onclick="pickplaylist(6); fadeInText(7)">melbourne bounce</span></li>
+                <li><span onclick="pickplaylist(7); fadeInText(8)">hyperchill</span></li>
+                <li><span onclick="pickplaylist(8); fadeInText(9)">mixtapes</span></li>
+             </div>
+            </ul>
           </div>
+          
           <div id="audiocontrol" class="flex-center">
             <div class="flex-center">
               <i class="material-icons" onclick="showvid()" id="showvidicon">video_library</i>
@@ -76,25 +97,7 @@
               <input type="range" min="0" max="25" step="1" value="2.5" oninput="setvolume(this.value)" id="volumeslider"></input>
             </div>
         </div>
-        <div id="playlists">
-          <ul id="swiper">
-            <div id="wrapper" class="wrapper">
-              <li><span onclick="pickplaylist(1); fadeInText(2)">uploads</span></li>
-              <li><span onclick="pickplaylist(2); fadeInText(3)">house</span></li>
-              <li><span onclick="pickplaylist(3); fadeInText(4)">trap</span></li>
-              <li><span onclick="pickplaylist(4); fadeInText(5)">bootlegs</span></li>
-            </div>
-            <div>
-              <span><i class="material-icons" onclick="swipe()" id="arrowright">chevron_right</i></span>
-            </div>
-            <div id="wrapper1" class="wrapper">
-              <li><span onclick="pickplaylist(5); fadeInText(6)">future house</span></li>
-              <li><span onclick="pickplaylist(6); fadeInText(7)">melbourne bounce</span></li>
-              <li><span onclick="pickplaylist(7); fadeInText(8)">hyperchill</span></li>
-              <li><span onclick="pickplaylist(8); fadeInText(9)">mixtapes</span></li>
-           </div>
-          </ul>
-        </div>
+
       </footer>
     </section>
     <section id="me">

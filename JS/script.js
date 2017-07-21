@@ -100,22 +100,24 @@ function setShuffle(shuffle)
 }
 function playlistpicker()
 {
-  loopLimit = 40;
-  animationobject = document.getElementById("song");
+  checker = false;
+  animationobject = document.getElementById("playlists");
   var playlisticon = document.getElementById("playlist");
   if(playlisticon.style.color === "" || playlisticon.style.color === "white")
   {
+    loopLimit = 100;
     playlisticon.style.color = "#007fff";
     cancelup = true;
-    goDownPlaylist();
+    goLeft();
     document.getElementById("audiocontrol").style.borderTop ="1px solid #1e1e1e";
     fadeInText(1);
   }
   else
   {
+    loopLimit = 0;
     playlisticon.style.color = "white";
     canceldown = true;
-    goUpPlaylist();
+    goRight();
   }
 }
 var test = false;
@@ -527,22 +529,22 @@ function seekTo(distance)
     player.seekTo(time);
   }
 }
-
+var checker = false;
 function swipe()
 {
-  loopLimit = 90;
+  checker = true;
   var arrow = document.getElementById("arrowright");
-  animationobject = document.getElementById("swiper");
+  animationobject = document.getElementById("playlists");
   counter++;
   if(counter%2 !== 0)
   {
-    cancelright = true;
+    loopLimit = 190;
     goLeft();
     arrow.style.transform= "rotate(180deg)";
   }
   else
   {
-    cancelleft = true;
+    loopLimit = 100;
     goRight();
     arrow.style.transform= "rotate(360deg)";
   }
@@ -560,8 +562,11 @@ var currentposition1 = 0;
 
 function goLeft()
 {
+
   setTimeout(function ()
   {
+    console.log("Current" + currentposition1);
+    console.log("Limit" + loopLimit);
     if (currentposition1 < loopLimit)
     {
       currentposition1++;
@@ -583,7 +588,7 @@ function goLeft()
   {
     setTimeout(function ()
     {
-      if (currentposition1 > 0)
+      if (currentposition1 > loopLimit)
       {
         currentposition1--;
         animationobject.style.right = currentposition1 + "vw";
@@ -644,46 +649,46 @@ function goDown()
       canceldown = false;
 }
 
-var currentposition3 = 0;
+var currentposition3 = 200;
 
-function goDownPlaylist()
+function showPlaylist()
 {
   setTimeout(function ()
   {
-    if (currentposition3 < loopLimit)
+    if (currentposition3 > 0)
     {
-      currentposition3++;
-      animationobject.style.top = currentposition3 + "px";
+      currentposition3--;
+      animationobject.style.left = currentposition3 + "vw";
       if(canceldown)
       {
         cancelup = false;
         return null;
       }
-      goDownPlaylist();
+      showPlaylist();
     }
   }, 5);
-  if(currentposition3 >= loopLimit)
+  if(currentposition3 <= loopLimit)
     cancelup = false;
 }
 /*****************/
 
-  function goUpPlaylist ()
+  function hidePlaylist()
   {
     setTimeout(function ()
     {
-      if (currentposition3 > 0)
+      if (currentposition3 < 0)
       {
-        currentposition3--;
-        animationobject.style.top = currentposition3 + "px";
+        currentposition3++;
+        animationobject.style.left = currentposition3 + "vw";
         if(cancelup)
         {
           canceldown = false;
           return null;
         }
-        goUpPlaylist();
+        hidePlaylist();
       }
     }, 5);
-    if(currentposition3 <= 0)
+    if(currentposition3 >= 0)
       canceldown = false;
 }
 
